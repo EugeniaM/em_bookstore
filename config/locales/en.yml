@@ -30,4 +30,32 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  welcome_msg: "Welcome to our amazing Bookstore!"
+  header:
+    app_name: "Bookstore"
+    home_menu: "Home"
+    shop_menu: "Shop"
+    log_in: "Log in"
+    sign_up: "Sign up"
+    log_out: "Log out"
+    mobile_development: "Mobile development"
+    photo: "photo"
+    web_design: "Web design"
+    web_development: "Web development"
+    account_menu: "My account"
+  auth:
+    sign_up: "Sign Up"
+    log_in: "Log In"
+    email_label: "Enter Email"
+    psw_label: "Password"
+    psw_confirm_label: "Confirm Password"
+    have_account: "Have an Account?"
+    not_have_account: "Don't have an Account?"
+    forgot_psw: "Forgot password?"
+    forgot_your_psw: "Forgot your password?"
+    email_instruct_notification: "We'll email you instructions on how to reset it"
+    email_placeholder: "Enter your email"
+    email_instructions: "Email Instructions"
+    cancel: "Cancel"
+
+
