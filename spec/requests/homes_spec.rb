@@ -5,7 +5,7 @@ RSpec.describe "Home" do
   subject { page }
   before { visit root_path }
 
-  it { should have_selector('h2', text: I18n.t('welcome_msg')) }
+  it { should have_selector('h2', text: I18n.t('home.welcome_msg')) }
 
   it "should have the right links on the layout" do
     first(:link, I18n.t('header.sign_up')).click

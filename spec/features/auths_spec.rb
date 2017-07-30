@@ -11,16 +11,14 @@ RSpec.feature "Authentication and authorization" do
       visit new_user_registration_path
       expect(page).to have_link('', href: user_facebook_omniauth_authorize_path)
       click_link('', href: user_facebook_omniauth_authorize_path)
-      expect(page).to have_selector('h2', text: I18n.t('welcome_msg'))
-      expect(page).to have_link(I18n.t('header.log_out'))
+      expect(page).to have_selector('h2', text: I18n.t('home.welcome_msg'))
     end
 
     scenario "user sign in using facebook" do
       visit new_user_session_path
       expect(page).to have_link('', href: user_facebook_omniauth_authorize_path)
       click_link('', href: user_facebook_omniauth_authorize_path)
-      expect(page).to have_selector('h2', text: I18n.t('welcome_msg'))
-      expect(page).to have_link(I18n.t('header.log_out'))
+      expect(page).to have_selector('h2', text: I18n.t('home.welcome_msg'))
     end
   end
 

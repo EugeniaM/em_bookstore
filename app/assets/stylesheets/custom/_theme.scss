@@ -524,6 +524,7 @@
   }
   .carousel-indicators {
     width: 7%;
+    min-width: 50px;
     left: 90%;
     margin-left: 0;
   }
@@ -593,4 +594,45 @@
 
 .cancel {
   margin: 20px;
+}
+
+.img-container {
+  height: 350px;
+}
+
+.lead.description {
+  height: 135px;
+  font-size: 18px;
+}
+
+.slide-titile {
+  height: 125px;
+}
+
+@media (min-width: $screen-sm-min) {
+  .carousel.slide, .best-sellers-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .best-seller-item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: $screen-sm-min) {
+  .carousel.slide, .best-sellers-container {
+    padding: 0 15px;
+  }
+}
+
+.jumbotron.text-center.mb-0 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mb-res-50.message {
+  max-width: 520px;
 }

@@ -30,7 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  welcome_msg: "Welcome to our amazing Bookstore!"
   header:
     app_name: "Bookstore"
     home_menu: "Home"
@@ -57,5 +56,9 @@ en:
     email_placeholder: "Enter your email"
     email_instructions: "Email Instructions"
     cancel: "Cancel"
-
+  home:
+    buy_now: "Buy Now"
+    welcome_msg: "Welcome to our amazing Bookstore!"
+    info_msg: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
+    get_started: "Get Started"
 
