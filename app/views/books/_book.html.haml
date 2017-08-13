@@ -1,0 +1,16 @@
+.col-sm-6.col-md-3.book-container
+  .general-thumb-wrap
+    .thumbnail.general-thumbnail
+      %img.img-shadow.general-thumbnail-img{'src': book.covers[0].url(:thumb), alt: book.title}
+      .thumb-hover
+        .general-thumb-link-wrap
+          %a.thumb-hover-link{href: book_path(book.id)}
+            %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+          %a.thumb-hover-link{href: "#"}
+            %i.fa.fa-shopping-cart.thumb-icon
+  .mb-35.best-seller-details
+    .clearfix
+      %p.pull-right.font-16.in-gold-500 €#{book.price}
+      %p.title.mr-55 #{book.title}
+    %span.divider-sm
+    %p.lead.small #{authors(book.authors)}

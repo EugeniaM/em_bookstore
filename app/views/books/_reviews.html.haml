@@ -1,0 +1,21 @@
+.reviews-container
+  - book.reviews.each do |review|
+    .general-message-wrap.divider-lg
+      .clearfix
+        - if review.user.avatar
+          %img.img-circle.logo-size.inlide-block.pull-left{"src": review.user.avatar}
+        - else
+          .img-circle.logo-size.inlide-block.pull-left.absent-avatar #{name_avatar(review)}
+        .ml-70
+          %div
+            .general-message-date.hidden-xs #{format_date(review.created_at)}
+            .max-240
+              .general-message-verified Verified Reviewer
+              .general-message-name #{display_name(review.user)}
+          .mb-15
+            %i.fa.fa-star{class: ("rate-star" if review.score >= 1)}
+            %i.fa.fa-star{class: ("rate-star" if review.score >= 2)}
+            %i.fa.fa-star{class: ("rate-star" if review.score >= 3)}
+            %i.fa.fa-star{class: ("rate-star" if review.score >= 4)}
+            %i.fa.fa-star{class: ("rate-star" if review.score >= 5)}
+          %p #{review.text}

@@ -61,4 +61,20 @@ en:
     welcome_msg: "Welcome to our amazing Bookstore!"
     info_msg: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
     get_started: "Get Started"
-
+  catalog:
+    catalog: "Catalog"
+    view_more: "View More"
+    newest_first: "Newest first"
+    popular_first: "Popular first"
+    price_low_hight: "Price: Low to high"
+    price_high_low: "Price: High to low"
+    title_a_z: "Title: A - Z"
+    title_z_a: "Title: Z - A"
+    all: "All"
+    filter_by_category: "Filter by category"
+  book_page:
+    add: "Add to Cart"
+    description: "Description"
+    year_of_publication: "Year of publication"
+    dimensions: "Dimensions"
+    materials: "Materials"

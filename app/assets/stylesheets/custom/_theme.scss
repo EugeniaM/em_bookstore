@@ -8,6 +8,9 @@
 .navbar-brand {
   font-size: $font-size-base;
 }
+.navbar-brand.bold {
+  text-decoration: none;
+}
 .navbar-toggle {
   margin-left: 15px;
   .icon-bar:nth-child(3) {
@@ -184,6 +187,11 @@
   font-size: $font-size-small;
   color: white;
 }
+.general-thumb-link-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .thumb-hover {
   background-color: $thumbnail-hover-bg;
   text-align: center;
@@ -198,7 +206,11 @@
 .thumb-hover-link {
   width: 40px;
   height: 40px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-size: 20px;
   border: 2px solid rgba($grey-200, 0.4);
   cursor: pointer;
   margin-left: 10px;
@@ -238,17 +250,22 @@
     padding-left: 0;
   }
 }
-.filter-link {
-  font-size: $font-size-base;
-  color: $grey-600;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  margin-bottom: 10px;
+a.filter-link {
+  font-size: $font-size-base!important;
+  color: $grey-600!important;
+  display: inline-block!important;
+  position: relative!important;
+  cursor: pointer!important;
+  margin-bottom: 10px!important;
+  text-decoration: none!important;
   &:hover {
-    color: $grey-900;
-    text-decoration: none;
+    color: $grey-900!important;
+    text-decoration: none!important;
   }
+}
+a.filter-link.selected {
+  color: #333!important;
+  font-weight: bold;
 }
 .input-link {
   font-size: $font-size-base;
@@ -635,4 +652,233 @@
 
 .mb-res-50.message {
   max-width: 520px;
+}
+
+.btn.btn-default.button-link, .btn.btn-primary.button-link{
+  font-size: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#hidden-view-more {
+  position: absolute;
+}
+
+.dropdown-menu.custom-dropdown {
+  position: absolute;
+  top: 0;
+  width: inherit;
+}
+
+.no-decoration {
+  font-size: $font-size-base!important;
+  color: $grey-600!important;
+  cursor: pointer!important;
+  text-decoration: none!important;
+  &:hover {
+    color: $grey-900!important;
+    text-decoration: none!important;
+  }
+  &.hover-red:hover {
+    color: $gold-500 !important;
+  }
+}
+
+@media (max-width: $screen-sm-min) {
+  .navbar-default #navbar {
+    border-color: transparent;
+    position: absolute;
+    top: 0;
+    background: white;
+    z-index: 1;
+    width: 50%;
+    min-width: 250px;
+    box-shadow: 0 5px 18px 2px rgba(1, 1, 1, 0.1);
+  }
+}
+
+.main-cover {
+  display: flex;
+  justify-content: center;
+  & .img-responsive {
+    height: 350px;
+  }
+}
+
+.images.clearfix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & .book-image {
+    width: 30%;
+  }
+}
+
+.input-group.general-position {
+  display: flex;
+  align-items: center;
+}
+
+.read-more {
+  color: $gold-500;
+  cursor: pointer;
+}
+
+.reviews-tabs {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  & .tab-container {
+    width: 50%;
+    cursor: pointer;
+  }
+  & .tab-container.selected-tab {
+    border-bottom: 2px solid $gold-500;
+  }
+}
+
+.link-tab {
+  text-decoration: none !important;
+  color: #333 !important;
+  &:hover {
+    color: #333;
+  }
+  &.selected-tab {
+    color: $gold-500 !important;
+  }
+}
+
+.no-user-review {
+  margin: 25px 0;
+}
+
+.new-review-container {
+  margin: 20px 0;
+  width: 100%;
+  max-width: 650px;
+  color: $grey-600;
+}
+
+.score-label {
+  color: $grey-600;
+  margin: 10px 0;
+}
+
+.score-stars {
+  width: 115px;
+}
+
+.star {
+  color: grey;
+  float: right;
+  font-size: 17px;
+  margin: 3px;
+  &:hover {
+    cursor: pointer;  
+  }
+}
+
+.star:hover ~ .star, .star:hover {
+  color: $gold-500;
+}
+
+.selected-star {
+  color: $gold-500;
+}
+
+#new_review {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-score {
+  display: flex;
+}
+
+fieldset, label { margin: 0; padding: 0; }
+
+.rating { 
+  border: none;
+  float: left;
+  margin-bottom: 0;
+  padding: 10px 0 0;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > label { 
+  color: #ddd; 
+  float: right; 
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label { 
+  color: $gold-500;  
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label { 
+  color: $gold-500;  
+}
+
+.reviews-container {
+  margin: 20px 0; 
+}
+
+.absent-avatar {
+  background: $grey-350;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+i.fa.fa-star {
+  color: $grey-350;
+  &.rate-star {
+    color: $gold-500;
+  }
+}
+
+#increment, #decrement {
+  color: #38678b;
+  cursor: pointer;
+}
+
+#review_title {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: unset;
+}
+
+#review_text {
+  margin-top: 10px;
+  resize: none;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  & input[type="submit"] {
+    width: 150px;
+    height: 40px;
+    border-radius: unset;
+    background: $grey-350;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+  }
 }

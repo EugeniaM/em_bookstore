@@ -19,52 +19,42 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to t('header.home_menu'), root_path
+            = link_to t('header.home_menu'), root_path, class: "no-decoration hover-red"
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('header.shop_menu')
+            %a{'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu", class: "no-decoration hover-red"}= t('header.shop_menu')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              %li
-                %a.collapse-link{href: "#"}= t('header.mobile_development')
-              %li
-                %a.collapse-link{href: "#"}= t('header.photo')
-              %li
-                %a.collapse-link{href: "#"}= t('header.web_design')
-              %li
-                %a.collapse-link{href: "#"}= t('header.web_development')
+              - categories.each do |category|
+                %li
+                  = link_to category.name, books_path(category: category.id, custom_sort: "title ASC"), class: "collapse-link no-decoration hover-red category-link"
           - if user_signed_in?
             %li.dropdown
-              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true"}= t('header.account_menu')
+              %a.dropdown-toggle.no-decoration.hover-red{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true"}= t('header.account_menu')
               %ul.dropdown-menu
                 %li
-                  = link_to t('header.log_out'), destroy_user_session_path, method: :delete
+                  = link_to t('header.log_out'), destroy_user_session_path, method: :delete, class: "no-decoration hover-red"
           - else
             %li
-              = link_to t('header.log_in'), new_user_session_path
+              = link_to t('header.log_in'), new_user_session_path, class: "no-decoration hover-red"
             %li
-              = link_to t('header.sign_up'), new_user_registration_path
+              = link_to t('header.sign_up'), new_user_registration_path, class: "no-decoration hover-red"
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            = link_to t('header.home_menu'), root_path
+            = link_to t('header.home_menu'), root_path, class: "no-decoration"
           %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true"}= t('header.shop_menu')
+            %a.dropdown-toggle.no-decoration{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true"}= t('header.shop_menu')
             %ul.dropdown-menu
-              %li
-                %a{href: "#"}= t('header.mobile_development')
-              %li
-                %a{href: "#"}= t('header.photo')
-              %li
-                %a{href: "#"}= t('header.web_design')
-              %li
-                %a{href: "#"}= t('header.web_development')
+              - categories.each do |category|
+                %li
+                  = link_to category.name, books_path(category: category.id, custom_sort: "title ASC"), class: "no-decoration category-link"
           - if user_signed_in?
             %li.dropdown
-              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true"}= t('header.account_menu')
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "true", class: "no-decoration"}= t('header.account_menu')
               %ul.dropdown-menu
                 %li
-                  = link_to t('header.log_out'), destroy_user_session_path, method: :delete
+                  = link_to t('header.log_out'), destroy_user_session_path, method: :delete, class: "no-decoration"
           - else
             %li
-              = link_to t('header.log_in'), new_user_session_path
+              = link_to t('header.log_in'), new_user_session_path, class: "no-decoration"
             %li
-              = link_to t('header.sign_up'), new_user_registration_path
+              = link_to t('header.sign_up'), new_user_registration_path, class: "no-decoration"

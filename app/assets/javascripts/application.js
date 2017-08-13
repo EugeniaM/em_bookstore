@@ -14,6 +14,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
 //= require owl.carousel
 //= require_tree .
+//= require_relative '../../../lib/assets/javascripts/jquery.raty.js'

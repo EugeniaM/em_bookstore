@@ -50,12 +50,14 @@ gem 'sprockets'
 gem 'activeadmin', github: 'activeadmin'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
+  gem "capybara-webkit"
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'selenium-webdriver'

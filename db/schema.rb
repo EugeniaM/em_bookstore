@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730105322) do
+ActiveRecord::Schema.define(version: 20170809180925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,9 @@ ActiveRecord::Schema.define(version: 20170730105322) do
     t.bigint "author_id"
     t.string "covers", default: [], array: true
     t.integer "order_counter", default: 0
+    t.string "publication_year"
+    t.string "dimensions"
+    t.string "materials"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["category_id"], name: "index_books_on_category_id"
   end
@@ -80,6 +83,19 @@ ActiveRecord::Schema.define(version: 20170730105322) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "text"
+    t.integer "score"
+    t.string "status", default: "Unprocessed"
+    t.boolean "verified", default: false
+    t.integer "user_id"
+    t.integer "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "book_id", "created_at"], name: "index_reviews_on_user_id_and_book_id_and_created_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -100,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170730105322) do
     t.boolean "is_admin", default: false
     t.string "provider"
     t.string "uid"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

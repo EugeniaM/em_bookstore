@@ -1,6 +1,6 @@
 ActiveAdmin.register Book do
-  permit_params :title, :short_description, :full_description, :price, :category_id, author_ids:[],
-                book_authors_attributes: [:id, :book_id, :author_id, :_destroy], covers: []
+  permit_params :title, :short_description, :full_description, :price, :publication_year, :dimensions, :materials,
+                :category_id, author_ids:[], book_authors_attributes: [:id, :book_id, :author_id, :_destroy], covers: []
 
   index do
     selectable_column
@@ -17,15 +17,15 @@ ActiveAdmin.register Book do
   end
   
   show do |book|
-    puts "!!!!!!!"
-    puts book.covers.empty?
-    puts "!!!!!!!"
     attributes_table do
       row :id
       row :title
       row :short_description
       row :full_description
       row :price
+      row :publication_year
+      row :dimensions
+      row :materials
       row :created_at
       row :updated_at
       row :category
@@ -52,6 +52,9 @@ ActiveAdmin.register Book do
       f.input :short_description
       f.input :full_description
       f.input :price
+      f.input :publication_year
+      f.input :dimensions
+      f.input :materials
       f.has_many :book_authors, allow_destroy: true do |deg|
         deg.input :author
       end
