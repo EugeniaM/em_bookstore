@@ -20,19 +20,4 @@ class BooksController < ApplicationController
       format.html
     end
   end
-
-  # def increment
-  #   @qty = @qty + 1
-  #   render action: :show  
-  # end
-
-  # def decrement
-  #   @qty = @qty - 1 if @qty > 1
-  # end
-
-  # private
-
-  # def set_qty
-  #   @qty = 1
-  # end
 end

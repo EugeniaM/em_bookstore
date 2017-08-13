@@ -6,6 +6,8 @@ RSpec.describe "Home" do
   before(:each) do
     categories = FactoryGirl.create_list(:category, 4)
     @categories = categories
+    best_sellers = FactoryGirl.create_list(:book, 4)
+    @best_sellers = best_sellers
     visit root_path 
   end
 
@@ -27,5 +29,9 @@ RSpec.describe "Home" do
     visit root_path
     click_link(I18n.t('home.get_started'))
     expect(page).to have_selector('h1', text: I18n.t('catalog.catalog'))
+
+    visit root_path
+    first('#eye', visible: false).click
+    expect(page).to have_selector('i.fa.fa-long-arrow-left')
   end
 end

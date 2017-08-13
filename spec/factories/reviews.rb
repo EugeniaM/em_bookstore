@@ -3,9 +3,9 @@ FactoryGirl.define do
     title "MyString"
     text "MyString"
     score 1
-    status "MyString"
+    status "Unprocessed"
     verified false
-    user_id 1
-    book_id 1
+    association :user_id, factory: :user
+    association :book_id, factory: :book
   end
 end

@@ -3,12 +3,12 @@
   $('#reviews-list-tab').removeClass('selected-tab');
   $('#new-review').addClass('selected-tab');
   $('#reviews-list').removeClass('selected-tab');
-  $("#review-handler").html("<%= escape_javascript(render :partial => 'books/review_form', :locals =>{:book => @book}) %>");
+  $("#review-handler").html("<%= escape_javascript(render :file => 'reviews/create', :locals =>{:book => @book}) %>");
 <% else %>
   $('#reviews-list-tab').addClass('selected-tab');
   $('#new-review-tab').removeClass('selected-tab');
   $('#reviews-list').addClass('selected-tab');
   $('#new-review').removeClass('selected-tab');
-  $("#review-handler").html("<%= escape_javascript(render :partial => 'books/reviews', :locals =>{:book => @book}) %>");
+  $("#review-handler").html("<%= escape_javascript(render :file => 'reviews/index', :locals =>{:book => @book}) %>");
 <% end %>
 

@@ -4,9 +4,9 @@
       %img.img-shadow.general-thumbnail-img{'src': book.covers[0].url(:thumb), alt: book.title}
       .thumb-hover
         .general-thumb-link-wrap
-          %a.thumb-hover-link{href: book_path(book.id)}
+          %a.thumb-hover-link#eye{href: book_path(book.id)}
             %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-          %a.thumb-hover-link{href: "#"}
+          %a.thumb-hover-link#cart{href: "#"}
             %i.fa.fa-shopping-cart.thumb-icon
   .mb-35.best-seller-details
     .clearfix

@@ -1,2 +1,35 @@
-%h1 Reviews#create
-%p Find me in app/views/reviews/create.html.haml
+-if !current_user
+  .no-user-review= t('book_page.please_log_in')
+-else
+  -if @book.review_errors.size
+    - @book.review_errors.each do |error|
+      .review-error * #{error}
+  - if stop_write_reviews(current_user)
+    -if review_approved(current_user)
+      .stop-reviews= t('book_page.stop_reviews')
+    - else
+      .success-msg= t('book_page.success_msg')
+  - else
+    .new-review-container
+      = form_for Review.new, url: "/books/#{@book.id}/reviews" do |f|
+        .form-group
+          %label.label-score= t('score')
+          %fieldset.rating
+            = radio_button_tag "score", "5"
+            %label{class: "full", for: "score_5", title: "5 stars"}
+            = radio_button_tag "score", "4"
+            %label{class: "full", for: "score_4", title: "4 stars"}
+            = radio_button_tag "score", "3"
+            %label{class: "full", for: "score_3", title: "3 stars"}
+            = radio_button_tag "score", "2"
+            %label{class: "full", for: "score_2", title: "2 stars"}
+            = radio_button_tag "score", "1"
+            %label{class: "full", for: "score_1", title: "1 star"}
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
+        .form-group
+          = f.label :text, t('book_page.review')
+          = f.text_area :text, class: 'form-control', rows: "5"
+        .submit-btn
+          = f.submit t('book_page.post'), class: 'btn btn-primary'

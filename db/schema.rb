@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809180925) do
+ActiveRecord::Schema.define(version: 20170813085043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170809180925) do
     t.string "publication_year"
     t.string "dimensions"
     t.string "materials"
+    t.string "review_errors", default: [], array: true
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["category_id"], name: "index_books_on_category_id"
   end

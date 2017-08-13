@@ -1,7 +1,7 @@
 %main.container
   %a.general-back-link{href: "javascript:history.back()"}
     %i.fa.fa-long-arrow-left.mr-15
-    Back to results
+    = t('book_page.back')
   .row
     .col-sm-6
       .product-gallery
@@ -31,7 +31,7 @@
           -if @book.full_description.length > 370
             %p.lead.small.line-height-2
               = truncate(@book.full_description, length: 370)
-              %span.read-more Read More
+              %span.read-more= t('book_page.read_more')
             %script{type: 'text/javascript'}
               :plain
                 $('.read-more').on('click', function(e) {
@@ -54,11 +54,11 @@
           %p.lead.small.pull-right #{@book.materials}
   .reviews-tabs
     .tab-container#new-review{class: ("selected-tab" if !@reviews_list)}
-      %span.link-tab#new-review-tab{class: ("selected-tab" if !@reviews_list), data: @book.id} Write a Review
+      %span.link-tab#new-review-tab{class: ("selected-tab" if !@reviews_list), data: @book.id}= t('book_page.Write a Review')
     .tab-container#reviews-list{class: ("selected-tab" if @reviews_list)}
-      %span.link-tab#reviews-list-tab{class: ("selected-tab" if @reviews_list), data: @book.id} Reviews (#{reviews_count})
+      %span.link-tab#reviews-list-tab{class: ("selected-tab" if @reviews_list), data: @book.id} #{show_reviews_counter}
   #review-handler
     -if !@reviews_list
-      = render 'books/review_form', book: @book
+      = render file: 'reviews/create', book: @book
     - else
-      = render 'books/reviews', book: @book
+      = render file: 'reviews/index', book: @book

@@ -1,2 +1,24 @@
-%h1 Reviews#index
-%p Find me in app/views/reviews/index.html.haml
+.reviews-container
+  - if @book.reviews.size == 0
+    .no-reviews-msg= t('book_page.no_reviews')
+  - else
+    - approved(@book.reviews).each do |review|
+      .general-message-wrap.divider-lg
+        .clearfix
+          - if review.user.avatar
+            %img.img-circle.logo-size.inlide-block.pull-left{"src": review.user.avatar}
+          - else
+            .img-circle.logo-size.inlide-block.pull-left.absent-avatar #{name_avatar(review)}
+          .ml-70
+            %div
+              .general-message-date.hidden-xs #{format_date(review.created_at)}
+              .max-240
+                .general-message-verified= t('book_page.verified_reviewer')
+                .general-message-name #{display_name(review.user)}
+            .mb-15
+              %i.fa.fa-star{class: ("rate-star" if review.score >= 1)}
+              %i.fa.fa-star{class: ("rate-star" if review.score >= 2)}
+              %i.fa.fa-star{class: ("rate-star" if review.score >= 3)}
+              %i.fa.fa-star{class: ("rate-star" if review.score >= 4)}
+              %i.fa.fa-star{class: ("rate-star" if review.score >= 5)}
+            %p #{review.text}
