@@ -113,4 +113,23 @@ RSpec.describe "Book page" do
     it { should have_selector('h2', text: I18n.t('home.welcome_msg')) }
   end
 
+  describe "when click on 'Add to Cart' button", js: true do
+    before do
+      visit book_path(book.id)
+      current_user = FactoryGirl.create(:user)
+      begin
+        order_status = OrderStatus.find(1)
+      rescue
+        order_status = FactoryGirl.create(:order_status, id: 1)
+      end
+      current_order = FactoryGirl.create(:order, order_status: order_status, user: current_user)
+      @order_item = current_order.order_items.new
+    end
+
+    it "should add items to order_item" do
+      first('.add-link').click
+      expect(page).to have_selector('.full-cart')
+    end
+  end
+
 end

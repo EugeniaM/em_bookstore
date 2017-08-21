@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170813085043) do
+ActiveRecord::Schema.define(version: 20170819203506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,60 @@ ActiveRecord::Schema.define(version: 20170813085043) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "guest_order_items", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "guest_order_id"
+    t.float "unit_price"
+    t.float "total_price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_guest_order_items_on_book_id"
+    t.index ["guest_order_id"], name: "index_guest_order_items_on_guest_order_id"
+  end
+
+  create_table "guest_orders", force: :cascade do |t|
+    t.bigint "order_status_id"
+    t.float "total"
+    t.float "subtotal"
+    t.string "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "discount", default: 0
+    t.index ["order_status_id"], name: "index_guest_orders_on_order_status_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "order_id"
+    t.float "unit_price"
+    t.float "total_price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.date "completed_at"
+    t.bigint "order_status_id"
+    t.float "total"
+    t.float "subtotal"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "discount", default: 0
+    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.string "text"
@@ -118,6 +172,8 @@ ActiveRecord::Schema.define(version: 20170813085043) do
     t.string "provider"
     t.string "uid"
     t.string "avatar"
+    t.string "coupon_code", default: "1234567"
+    t.boolean "coupon_used", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -126,4 +182,11 @@ ActiveRecord::Schema.define(version: 20170813085043) do
   add_foreign_key "book_authors", "books"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "categories"
+  add_foreign_key "guest_order_items", "books"
+  add_foreign_key "guest_order_items", "guest_orders"
+  add_foreign_key "guest_orders", "order_statuses"
+  add_foreign_key "order_items", "books"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "order_statuses"
+  add_foreign_key "orders", "users"
 end

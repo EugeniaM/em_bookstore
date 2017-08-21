@@ -1,0 +1,67 @@
+- if !@order_item.nil? && @order_item.errors.any?
+  .alert.alert-danger
+    %ul
+      - @order_item.errors.full_messages.each do |msg|
+        %li ${msg}
+- if @order_items.size == 0
+  %p.text-center.no-items= t('cart_page.no_items')
+- else
+  .visible-xs
+    - @order_items.each do |order_item|
+      = render 'carts/narrow_cart_row', book: order_item.book, order_item: order_item
+  .hidden-xs
+    %table.table.table-hover.cart-container
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600= t('cart_page.product')
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600= t('cart_page.price')
+        %th.col-quantity
+          %span.in-grey-600= t('cart_page.qty')
+        %th.col-total
+          %span.in-grey-600= t('cart_page.subtotal')
+        %th.col-close
+      - @order_items.each do |order_item|
+        = render 'carts/wide_cart_row', book: order_item.book, order_item: order_item
+  .general-order-wrap
+    .row
+      = form_for current_order, url: get_cart_url(current_order), method: :patch, remote: true do |f| 
+        .col-sm-4
+          .input-group.general-input-group
+            %label.input-label= t('cart_page.coupon_label')
+            = f.text_field :discount, class: 'form-control mb-30', placeholder: "Enter Your Coupon Code", value: "", disabled: !current_user
+            %div
+              = button_tag( class: "btn btn-primary mb-15 res-block", disabled: !current_user) do
+                %span.btn-title= t('cart_page.update_cart')
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18= t('cart_page.order_summary')
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            %tr
+              %td
+                %p.font-16= t('cart_page.subtotal_summary')
+              %td
+                %p.font-16 €#{round_price(current_order.subtotal)}
+            %tr
+              %td
+                %p.font-16= t('cart_page.coupon')
+              %td
+                %p.font-16= count_discount(current_order.subtotal, current_order.discount)
+            %tr
+              %td
+                %strong.font-18= t('cart_page.order_total')
+              %td
+                %strong.font-18 €#{round_price(current_order.total)}
+          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart_page.checkout')
+  - if !current_user
+    = link_to "Checkout", identify_path
+  - else
+    %button.btn.btn-default.mb-20.hidden-xs.center-block= t('cart_page.checkout')
+
+
+
+
+
+
+  

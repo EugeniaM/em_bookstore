@@ -13,18 +13,21 @@
     .col-sm-6
       %h1.mt-res-0 #{@book.title}
       %p.lead.small #{authors(@book.authors)}
-      .row
-        .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10 €#{@book.price}
-        .col-xs-5.col-md-3
-          .input-group.general-position
-            .input-link#decrement
-              %i.fa.fa-minus.line-height-40
-            %input.form-control.quantity-input#quantity-input{type: "text", value: @qty}
-            .input-link#increment
-              %i.fa.fa-plus.line-height-40
-        .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position= t('book_page.add')
+      = form_for @order_item, remote: true do |f|      
+        .row
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10 €#{@book.price}
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              .input-link.decrement
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, class: 'form-control quantity-input', id: 'quantity-input', value: @qty
+              .input-link.increment
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.hidden_field :book_id, value: @book.id
+            = button_tag( :class => "btn btn-default pull-right general-position add-link") do
+              %span.btn-title= t('book_page.add')
       .general-info-wrap.divider-lg
         %p= t('book_page.description')
         %div

@@ -6,7 +6,8 @@ end
 
 def filter_regex(category)
   if !category
-    /#{Book.all.map { |b| Regexp.quote(b.title) }
+    /#{Book.order("title ASC")
+    .map { |b| Regexp.quote(b.title) }
     .join(".+")}/
   else
     /#{Book.where(category: category)

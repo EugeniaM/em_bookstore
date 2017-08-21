@@ -163,7 +163,6 @@
   min-height: 27px;
   color: $shop-icon-bg;
   display: inline-block;
-  background-color: $shop-icon-bg;
   border: 2px solid currentColor;
   position: relative;
   padding: 2px 7px;
@@ -181,6 +180,9 @@
   }
   &:empty {
     background-color: transparent;
+  }
+  &.full-cart {
+    background-color: $shop-icon-bg;
   }
 }
 .shop-quantity {
@@ -223,6 +225,22 @@
     }
   }
 }
+.thumb-hover-link.submit {
+  background: transparent;
+  background-image: none;
+  border-radius: initial;
+  & .thumb-icon {
+    text-shadow: none;
+  }
+  &:hover {
+    background-color: $grey-200;
+    background-image: none;
+    .thumb-icon {
+      color: $gold-500;
+    }
+  }
+}
+
 .thumb-icon {
   font-size: 16px;
   color: white;
@@ -852,7 +870,7 @@ i.fa.fa-star {
   }
 }
 
-#increment, #decrement {
+.increment, .decrement {
   color: #38678b;
   cursor: pointer;
 }
@@ -889,4 +907,59 @@ i.fa.fa-star {
 
 .stop-reviews, .success-msg {
   margin: 20px 0;
+}
+
+.shop-icon-container.visible-xs {
+  margin: 0 15px;
+}
+
+.shop-icon-container.hidden-xs {
+  margin-bottom: 5px;
+}
+
+.quantity-link {
+  text-decoration: none !important;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close.general-cart-close {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  color: $grey-900;
+  &:hover {
+    background: transparent !important;
+    background-image: none !important;
+  }
+}
+
+.btn-title {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.guest-identify-title {
+  color: $gold-500;
+}
+
+.general-login-icon.black {
+  color: #333;
+}
+
+.orange.forgot_link {
+  color: $gold-500;
+  text-decoration: none;
+}
+
+.custom-btn.identify {
+  display: block;
+  width: 35%;
+  min-width: 250px;
+  margin: 20px 0;
+}
+
+.secondary-text {
+  font-size: 12px;
+  color: $grey-600;
 }

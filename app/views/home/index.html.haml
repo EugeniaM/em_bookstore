@@ -16,8 +16,12 @@
               %h2.slide-titile #{book.title}
               %p.lead.description #{limit_description(book.short_description)}
               %p.lead.small #{authors(book.authors)}
-              .general-align
-                %button.btn.btn-primary= t('home.buy_now')
+              .general-align.stop-propagation
+                = form_for @order_item, remote: true do |f|
+                  = f.hidden_field :book_id, value: book.id
+                  = f.hidden_field :quantity, value: "1"
+                  = button_tag( :class => "btn btn-primary carousel-buy-link") do
+                    %span.btn-title= t('home.buy_now')
 .container
   .jumbotron.text-center.mb-0
     %h2.h1= t('home.welcome_msg')
@@ -28,4 +32,4 @@
   %h3 Best Sellers
   .row.best-seller-item
     - @best_sellers.each do |book|
-      = render 'books/book', book: book
+      = render 'books/book', book: book, order_item: @order_item

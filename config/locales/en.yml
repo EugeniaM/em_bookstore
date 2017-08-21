@@ -91,3 +91,23 @@ en:
     post: "Post"
     stop_reviews: "You have already left a review for this book"
     success_msg: "Thanks for Review. It will be published as soon as Admin will approve it."
+  cart_page:
+    cart_title: "Cart"
+    no_items: "There are no items in your shopping cart"
+    product: "Product"
+    price: "Price"
+    qty: "Quantity"
+    subtotal: "SubTotal"
+    coupon_label: "Enter Your Coupon Code"
+    update_cart: "Update cart"
+    order_summary: "Order Summary"
+    subtotal_summary: "Subtotal:"
+    coupon: "Coupon:"
+    order_total: "Order Total:"
+    checkout: "Checkout"
+
+
+
+
+
+

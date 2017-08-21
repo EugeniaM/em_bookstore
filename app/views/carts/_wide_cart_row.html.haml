@@ -1,0 +1,17 @@
+%tr
+  %td
+    .general-img-wrap-table
+      %img.cart-img-shadow.pull-left{'src': book.covers[0].url(:thumb), alt: book.title}
+  %td
+    %p.title #{book.title}
+  %td
+    %span.font-16.in-gold-500 €#{order_item.unit_price}
+  %td
+    .input-group.general-position{data: order_item.id, book: order_item.book.id, user: current_user ? 'user' : 'guest'}
+      = link_to "-", get_url(order_item, 'decrement'), method: :patch, remote: true, class: "quantity-link"
+      %input.form-control.quantity-input{type: "text", value: order_item.quantity.to_i}
+      = link_to "+", get_url(order_item, 'increment'), method: :patch, remote: true, class: "quantity-link"
+  %td
+    %span.font-16.in-gold-500 €#{order_item.total_price}
+  %td
+    = button_to "&times;".html_safe, order_item, method: :delete, remote: true, class: "close general-cart-close"
