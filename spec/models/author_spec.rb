@@ -43,15 +43,15 @@ RSpec.describe Author do
     let(:names) { ["test", "test.", "test. test", "test test", 'a'*50] }
     
     it "first_name should be invalid" do
-      names.each do |invalid_name|
-        author.first_name = invalid_name
+      names.each do |valid_name|
+        author.first_name = valid_name
         expect(author).to be_valid
       end
     end
 
     it "last_name should be invalid" do
-      names.each do |invalid_name|
-        author.last_name = invalid_name
+      names.each do |valid_name|
+        author.last_name = valid_name
         expect(author).to be_valid
       end
     end

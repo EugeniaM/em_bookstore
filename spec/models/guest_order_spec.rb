@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe GuestOrder, type: :model do
-  let(:guest_order) { FactoryGirl.create(:guest_order) }
+  begin
+    order_status = OrderStatus.find(1)
+  rescue
+    order_status = FactoryGirl.create(:order_status, id: 1)
+  end
+  let(:guest_order) { FactoryGirl.create(:guest_order, order_status: order_status) }
 
   subject { guest_order }
 

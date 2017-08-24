@@ -51,6 +51,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
+gem 'country_select'
+gem 'countries'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

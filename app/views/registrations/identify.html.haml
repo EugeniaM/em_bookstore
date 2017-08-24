@@ -4,11 +4,11 @@
     .row
       .col-md-6
         .text-center
-          %h3.guest-identify-title Returning Customer
+          %h3.guest-identify-title= t('identify.returning_customer')
           %a.general-login-icon.black{href: user_facebook_omniauth_authorize_path}
             %i.fa.fa-facebook-official
-          %p.general-login-text or
-        %p Log In with Password
+          %p.general-login-text= t('identify.or')
+        %p= t('identify.log_in_psw')
         = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'auth-form'}) do |f|
           .form-group
             = f.label t('auth.email_label')
@@ -17,75 +17,17 @@
             = f.label t('auth.psw_label')
             = f.password_field :password, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_label')
           = link_to t('auth.forgot_psw'), new_password_path(resource_name), class: "orange forgot_link"
-          = f.button "Log In with Password", class: 'btn btn-primary btn-lg custom-btn identify'
+          = f.button t('identify.log_in_psw'), class: 'btn btn-primary btn-lg custom-btn identify'
       .col-md-6
         .text-center
-          %h3.guest-identify-title New Customer
+          %h3.guest-identify-title= t('identify.new_customer')
           %a.general-login-icon.black{href: user_facebook_omniauth_authorize_path}
             %i.fa.fa-facebook-official
-          %p.general-login-text or
-        %p Quick registration
-        %p.secondary-text You'll be able to create password later
+          %p.general-login-text= t('identify.or')
+        %p= t('identify.quick_registration')
+        %p.secondary-text= t('identify.psw_later')
         = form_for(resource, as: resource_name, url: quick_registration_path(resource_name), html: {class: 'auth-form'}) do |f|
           .form-group
             = f.label t('auth.email_label')
             = f.email_field :email, autofocus: true, class: 'form-control auth', placeholder: t('auth.email_label')
-          = f.button "Continue to Checkout", class: 'btn btn-primary btn-lg custom-btn identify'
-
-  / .text-center
-  /   %h3.general-login-title= t('auth.sign_up')
-  /   %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
-  /     %i.fa.fa-facebook-official
-  /   %p.general-login-text or
-
-  / / = render partial: '/helpers/validation_errors', locals: { suspect: resource }
-  / = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'auth-form col-md-4 col-md-offset-4'}) do |f|
-  /   / .form-group
-  /   /   = f.label :first_name
-  /   /   = f.text_field :first_name, autofocus: true, class: 'form-control'
-  /   / .form-group
-  /   /   = f.label :last_name
-  /   /   = f.text_field :last_name, class: 'form-control'
-  /   .form-group
-  /     = f.label t('auth.email_label')
-  /     = f.email_field :email, autofocus: true, class: 'form-control auth', placeholder: t('auth.email_label')
-  /   .form-group
-  /     = f.label t('auth.psw_label')
-  /     = f.password_field :password, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_label')
-  /   .form-group
-  /     = f.label t('auth.psw_confirm_label')
-  /     = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_confirm_label')
-  /   .text-center
-  /     = f.button t('auth.sign_up'), class: 'btn btn-primary btn-lg custom-btn'
-  /   .text-center
-  /     .options-proposition
-  /       %span= t('auth.have_account')
-  /       = link_to t('auth.log_in'), new_user_session_path, class: "orange"
-
-  / .text-center
-  /   %h3.general-login-title= t('auth.log_in')
-  /   %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
-  /     %i.fa.fa-facebook-official
-  /   %p.general-login-text or
-
-  / / = render partial: '/helpers/validation_errors', locals: { suspect: resource }
-  / = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'auth-form col-md-4 col-md-offset-4'}) do |f|
-  /   .form-group
-  /     = f.label t('auth.email_label')
-  /     = f.email_field :email, autofocus: true, class: 'form-control auth', placeholder: t('auth.email_label')
-  /   .form-group
-  /     = f.label t('auth.psw_label')
-  /     = f.password_field :password, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_label')
-  /   - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-  /     = link_to t('auth.forgot_psw'), new_password_path(resource_name), class: "orange"
-  /   .text-center
-  /     - if devise_mapping.rememberable?
-  /       .form-group
-  /         = f.check_box :remember_me
-  /         = f.label :remember_me
-  /   .text-center
-  /     = f.button t('auth.log_in'), class: 'btn btn-primary btn-lg custom-btn'
-  /   .text-center
-  /     .options-proposition
-  /       %span= t('auth.not_have_account')
-  /       = link_to t('auth.sign_up'), new_user_registration_path, class: "orange"
+          = f.button t('identify.continue_checkout'), class: 'btn btn-primary btn-lg custom-btn identify'

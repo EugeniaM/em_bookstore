@@ -43,6 +43,10 @@ RSpec.describe "Home" do
     visit root_path
     first('#eye', visible: false).click
     expect(page).to have_selector('i.fa.fa-long-arrow-left')
+
+    visit root_path
+    first('#eye', visible: false).click
+    expect(page).to have_selector('i.fa.fa-long-arrow-left')
   end
 
   describe "when cart is empty" do
@@ -75,6 +79,22 @@ RSpec.describe "Home" do
     it "should redirect to cart page" do
       first('.shop-link.pull-right').click
       expect(page).to have_selector('h1.general-title-margin', text: I18n.t('cart_page.cart_title'))
+    end
+  end
+
+  describe "when user is logged in" do
+    before do
+      visit new_user_session_path
+      fill_in I18n.t('auth.email_label'), with: current_user.email
+      fill_in I18n.t('auth.psw_label'), with: current_user.password
+      click_button(I18n.t('auth.log_in'))
+      visit root_path
+    end
+
+    it "should redirect to settings page when click on 'Settings' submenu" do
+      first(:link, I18n.t('header.account_menu')).click
+      first(:link, I18n.t('header.settings')).click
+      expect(page).to have_selector('h1', text: I18n.t('settings_page.settings'))
     end
   end
 end

@@ -1,0 +1,8 @@
+$(".billing-address-container").html("<%= escape_javascript(render 'users/billing_address') %>")
+$('#billing_address_country').change(function(e) {
+  var url;
+  if(this.value) {
+    url = "billing_country_change?country=" + this.value;
+    $.get(url);
+  }
+})

@@ -1,0 +1,12 @@
+%main.container
+  %h1.general-title-margin= t('settings_page.settings')
+  %ul.nav.clearfix.mb-20{role: "tablist"}
+    %li.tab-item.settings.active{role: "presentation"}
+      %a.tab-link{href: "#address", 'aria-controls': "address", role: "tab", 'data-toggle': "tab"}= t('settings_page.address')
+    %li.tab-item.settings{role: "presentation"}
+      %a.tab-link{href: "#privacy", 'aria-controls': "privacy", role: "tab", 'data-toggle': "tab"}= t('settings_page.privacy')
+  .tab-content
+    #address.tab-pane.fade.in.active.general-main-wrap{role: "tabpanel"}
+      = render 'users/addresses'
+    #privacy.tab-pane.fade{role: "tabpanel"}
+      = render 'users/privacy'

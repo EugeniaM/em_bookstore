@@ -963,3 +963,55 @@ i.fa.fa-star {
   font-size: 12px;
   color: $grey-600;
 }
+
+.checkout-btn {
+  width: 120px;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.tab-item.settings {
+  & > a {
+    text-decoration: none;
+    color: $grey-600;
+  }
+
+  &.active > a {
+    color: $grey-900;
+  }
+}
+
+.active-settings-btn {
+  background-image: none !important;
+  background-color: $grey-900 !important;
+  border-radius: initial !important;
+  border: none !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  line-height: 20px !important;
+  text-shadow: none !important;
+  padding: 10px !important;
+  width: 215px !important;
+  &.narrow {
+    width: 130px !important;
+  }
+}
+
+.error-block {
+  color: red;
+  font-size: 11px;
+}
+
+.form-group.select {
+  display: flex;
+  flex-direction: column;
+}
+
+#billing_address_country, 
+#shipping_address_country {
+  width: 75%;
+  background: transparent;
+  height: 38px;
+  border: 1px solid #c9d0d6;
+  border-radius: 3px;
+}

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if current_user
-      order = Order.find_by user_id: current_user.id
+      order = Order.find_by user_id: current_user.id, order_status_id: 1
       order = order || Order.new
       order
     else

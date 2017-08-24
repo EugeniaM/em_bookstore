@@ -2,6 +2,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :reviews
+  has_one :billing_address
+  has_one :shipping_address
+  accepts_nested_attributes_for :billing_address, allow_destroy: true
+  accepts_nested_attributes_for :shipping_address, allow_destroy: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
@@ -22,7 +26,8 @@ class User < ApplicationRecord
       update(user.id, provider: auth.provider, uid: auth.uid)
     else
       create do |u|
-        u.email = auth.info.email
+        u.email = auth.info.email if auth.info.email
+        u.email = "#{auth.info.first_name}#{auth.info.last_name}@fb.com"
         u.first_name = auth.info.first_name
         u.last_name = auth.info.last_name
         u.avatar = auth.info.image

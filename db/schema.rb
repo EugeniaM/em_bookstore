@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819203506) do
+ActiveRecord::Schema.define(version: 20170822174443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,20 @@ ActiveRecord::Schema.define(version: 20170819203506) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "billing_addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
   create_table "book_authors", force: :cascade do |t|
@@ -153,6 +167,20 @@ ActiveRecord::Schema.define(version: 20170819203506) do
     t.index ["user_id", "book_id", "created_at"], name: "index_reviews_on_user_id_and_book_id_and_created_at"
   end
 
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -178,6 +206,7 @@ ActiveRecord::Schema.define(version: 20170819203506) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "billing_addresses", "users"
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
   add_foreign_key "books", "authors"
@@ -189,4 +218,5 @@ ActiveRecord::Schema.define(version: 20170819203506) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
+  add_foreign_key "shipping_addresses", "users"
 end

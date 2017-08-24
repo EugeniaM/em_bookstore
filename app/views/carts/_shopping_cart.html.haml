@@ -53,11 +53,14 @@
                 %strong.font-18= t('cart_page.order_total')
               %td
                 %strong.font-18 €#{round_price(current_order.total)}
-          %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart_page.checkout')
+          - if !current_user
+            = link_to t('cart_page.checkout'), identify_path, class: "btn btn-default mb-20 visible-xs-inline-block checkout-btn"
+          - else
+            = link_to t('cart_page.checkout'), "#", class: "btn btn-default mb-20 visible-xs-inline-block checkout-btn"
   - if !current_user
-    = link_to "Checkout", identify_path
+    = link_to t('cart_page.checkout'), identify_path, class: "btn btn-default mb-20 hidden-xs center-block checkout-btn"
   - else
-    %button.btn.btn-default.mb-20.hidden-xs.center-block= t('cart_page.checkout')
+    = link_to t('cart_page.checkout'), "#", class: "btn btn-default mb-20 hidden-xs center-block checkout-btn"
 
 
 

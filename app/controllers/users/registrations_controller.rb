@@ -21,8 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     email = params[:user][:email]
     user = User.create!(email: email, password: generated_password)
     save_orders(user)
+    UserMailer.welcome_email(user, generated_password).deliver_now
     sign_in(:user, user)
-    # RegistrationMailer.welcome(user, generated_password).deliver
     redirect_to root_path
   end
 
