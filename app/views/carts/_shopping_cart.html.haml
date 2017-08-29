@@ -60,7 +60,7 @@
   - if !current_user
     = link_to t('cart_page.checkout'), identify_path, class: "btn btn-default mb-20 hidden-xs center-block checkout-btn"
   - else
-    = link_to t('cart_page.checkout'), "#", class: "btn btn-default mb-20 hidden-xs center-block checkout-btn"
+    = link_to t('cart_page.checkout'), checkout_addresses_path, class: "btn btn-default mb-20 hidden-xs center-block checkout-btn"
 
 
 

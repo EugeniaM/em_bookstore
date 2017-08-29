@@ -8,8 +8,8 @@
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 # OrderStatus.delete_all
-# OrderStatus.create! id: 1, name: "in_progress"
-# OrderStatus.create! id: 2, name: "in_queue"
-# OrderStatus.create! id: 3, name: "in_delivery"
-# OrderStatus.create! id: 4, name: "delivered"
-# OrderStatus.create! id: 5, name: "canceled"
+# OrderStatus.create! id: 1, name: "in_progress", display_title: "In Progress"
+# OrderStatus.create! id: 2, name: "in_queue", display_title: "Waiting for processing"
+# OrderStatus.create! id: 3, name: "in_delivery", display_title: "In Delivery"
+# OrderStatus.create! id: 4, name: "delivered", display_title: "Delivered"
+# OrderStatus.create! id: 5, name: "canceled", display_title: "Canceled"

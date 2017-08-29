@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822174443) do
+ActiveRecord::Schema.define(version: 20170827123322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,27 @@ ActiveRecord::Schema.define(version: 20170822174443) do
     t.index ["order_status_id"], name: "index_guest_orders_on_order_status_id"
   end
 
+  create_table "order_addresses", force: :cascade do |t|
+    t.string "billing_first_name"
+    t.string "billing_last_name"
+    t.string "billing_address"
+    t.string "billing_city"
+    t.string "billing_zip"
+    t.string "billing_country"
+    t.string "billing_phone"
+    t.string "shipping_first_name"
+    t.string "shipping_last_name"
+    t.string "shipping_address"
+    t.string "shipping_city"
+    t.string "shipping_zip"
+    t.string "shipping_country"
+    t.string "shipping_phone"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_addresses_on_order_id"
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "order_id"
@@ -139,6 +160,7 @@ ActiveRecord::Schema.define(version: 20170822174443) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "display_title"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -150,8 +172,21 @@ ActiveRecord::Schema.define(version: 20170822174443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "discount", default: 0
+    t.float "delivery", default: 0.0
+    t.string "number"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payment_cards", force: :cascade do |t|
+    t.string "card_number"
+    t.string "name"
+    t.string "expiry_date"
+    t.string "cvv"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payment_cards_on_order_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -214,9 +249,11 @@ ActiveRecord::Schema.define(version: 20170822174443) do
   add_foreign_key "guest_order_items", "books"
   add_foreign_key "guest_order_items", "guest_orders"
   add_foreign_key "guest_orders", "order_statuses"
+  add_foreign_key "order_addresses", "orders"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
+  add_foreign_key "payment_cards", "orders"
   add_foreign_key "shipping_addresses", "users"
 end

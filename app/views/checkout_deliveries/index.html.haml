@@ -1,0 +1,53 @@
+%main.container
+  = render "layouts/checkout_header"
+  .order-delivery-continer  
+    %h3.general-subtitle Shipping Method
+    .delivery-form-container
+      .delivery-header.hidden-xs
+        .header-item Method
+        .header-item Days
+        .header-item Price
+      = form_for @order, url: "/checkout_deliveries/update", method: :post, format: :js, remote: true do |f|
+        .delivery-item
+          .delivery-header.visible-xs
+            .header-item.item Method
+            .header-item.item Days
+            .header-item.item Price
+          .delivery-option
+            .radio-btn.item
+              = f.radio_button :delivery, '5', checked: default_delivery_checked(5.0)
+              %label{ for: "order_delivery_5" } Delivery Next Day!
+            .delivery-days.item
+              %span 3 to 7 days
+            .delivery-price.item
+              %span €5.00
+        .delivery-item
+          .delivery-header.visible-xs
+            .header-item.item Method
+            .header-item.item Days
+            .header-item.item Price
+          .delivery-option
+            .radio-btn.item
+              = f.radio_button :delivery, '10', checked: delivery_checked(10.0)
+              %label{ for: "order_delivery_10" } Pick Up In-Store
+            .delivery-days.item
+              %span 5 to 20 days
+            .delivery-price.item
+              %span €10.00
+        .delivery-item
+          .delivery-header.visible-xs
+            .header-item.item Method
+            .header-item.item Days
+            .header-item.item Price
+          .delivery-option
+            .radio-btn.item
+              = f.radio_button :delivery, '15', checked: delivery_checked(15.0)
+              %label{ for: "order_delivery_15" } Expressit
+            .delivery-days.item
+              %span 2 to 3 days
+            .delivery-price.item
+              %span €15.00
+    .general-text-align.delivery-summary
+      = render "checkout_deliveries/summary"
+    .text-center.redirect-to
+      =link_to "Save and Continue", redirect_from_delivery, class: "checkout-btn link"

@@ -1,0 +1,13 @@
+%tr
+  %td
+    .general-img-wrap-table
+      %img.cart-img-shadow.pull-left{'src': book.covers[0].url(:thumb), alt: book.title}
+  %td
+    %p.title #{book.title}
+    %p #{book.short_description}
+  %td
+    %span.font-16.in-gold-500 €#{order_item.unit_price}
+  %td
+    %span.ml-30 #{order_item.quantity.to_i}
+  %td
+    %span.font-16.in-gold-500 €#{order_item.total_price}

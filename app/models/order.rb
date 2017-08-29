@@ -5,13 +5,17 @@ class Order < ApplicationRecord
   before_validation :set_order_status, on: :create
   before_save :update_subtotal
   before_save :update_total
+  has_one :order_address
+  accepts_nested_attributes_for :order_address, allow_destroy: true
+  has_one :payment_card
+  accepts_nested_attributes_for :payment_card, allow_destroy: true
 
   def subtotal
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
   end
 
   def total
-    subtotal.to_f * ( 1 - discount.to_f / 100 )
+    subtotal.to_f * ( 1 - discount.to_f / 100 ) + (delivery.to_f)
   end
 
   private

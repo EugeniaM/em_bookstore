@@ -1008,10 +1008,240 @@ i.fa.fa-star {
 }
 
 #billing_address_country, 
-#shipping_address_country {
+#shipping_address_country,
+#order_address_billing_country,
+#order_address_shipping_country {
   width: 75%;
   background: transparent;
   height: 38px;
   border: 1px solid #c9d0d6;
   border-radius: 3px;
 }
+
+ul.steps.list-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  & .step {
+    margin-bottom: 0 !important;
+  }
+}
+
+.checkout-btn {
+  width: 175px;
+  background-image: none;
+  background-color: #1e1e1c;
+  color: #eeeeee !important;
+  font-weight: 500 !important;
+  text-shadow: none;
+  &:hover {
+    background-image: none !important;
+    background-color: #1e1e1c !important;
+    color: white !important;
+  }
+}
+
+.redirect-to {
+  margin: 50px;
+  & .checkout-btn.link {
+    text-decoration: none !important;
+    padding: 12px 35px;
+    margin: 10px;
+  }
+}
+
+.delivery-header {
+  display: flex;
+  justify-content: space-around;
+  color: $grey-600;
+  & .header-item {
+    width: 30%;
+  }
+}
+
+.delivery-item {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid $grey-200;
+  &:hover {
+    background: $grey-200;
+  }
+  & .item {
+    width: 30%;
+    padding: 20px 0;
+    margin: 0;
+    & .form-group {
+      margin: 0;
+    }
+  }
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  display: none;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+  position: relative;
+  padding-left: 32px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #333;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #c3c3c3;
+  border-radius: 100%;
+  background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #1e1e1c;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.delivery-option {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .delivery-option {
+    flex-direction: column;
+    width: 75%;
+  }
+  .delivery-header {
+    width: 25%;
+  }
+}
+
+.payment-row {
+  display: flex;
+  width: 50%;
+  min-width: 300px;
+  & .form-group:first-child {
+    width: 50%;
+  }
+  & .form-group:last-child {
+    position: relative;
+  }
+  & .form-group input {
+    width: 90%;
+  }
+
+  & .form-group .fa {
+    right: 25px;
+  }
+}
+
+.payment-number {
+  width: 50%;
+  min-width: 300px;
+  & input {
+    width: 97% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 300px;
+    & .form-group:first-child {
+      width: 100%;
+    }
+    & .form-group:last-child {
+      position: relative;
+    }
+    & .form-group input {
+      width: 100%;
+    }
+
+    & .form-group .fa {
+      right: 15px;
+    }
+  }
+
+  .payment-number {
+    width: 100%;
+    min-width: 300px;
+    & input {
+      width: 100% !important;
+    }
+  }
+}
+
+.tooltip-card {
+  width: 110px;
+  height: 110px;
+  background: rgba(100, 100, 100, .7);
+  border-radius: 15%;
+  color: white;
+  font-size: 9px;
+  padding: 9px;
+  position: absolute;
+  bottom: 35px;
+  display: none;
+
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: rgba(100, 100, 100, .7) transparent transparent transparent;
+    position: relative;
+    left: 65px;
+    top: calc(100% + 19px);
+  }
+}
+
+@media (max-width: 768px) {
+  .tooltip-card {
+    right: 0;
+  }
+}
+
+.general-edit {
+  text-decoration: none !important;
+  color: $grey-600 !important;
+}
+
+.summary-info, .complete-info {
+  padding-bottom: 30px;
+  border-bottom: 1px solid $grey-200;
+}
+
+thead th {
+  background: transparent !important;
+}
+

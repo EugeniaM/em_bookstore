@@ -1,0 +1,36 @@
+%main.container.general-main-wrap
+  %h1.mt-0.mb-25 My Orders
+  %p.lead.small.mb-10.visible-xs Sort by
+  .dropdowns.dropdown.general-order-dropdown
+    %a.dropdown-toggle.lead.small.no-decoration{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      #{selected_sort_status}
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu.custom-dropdown
+      - @statuses.each do |status|
+        %li
+          %a{href: "/orders?status=#{status.id}", class: "no-decoration"} #{status[:display_title]}
+      %li
+        %a{href: "/orders", class: "no-decoration"} All
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Number
+          %th
+            %span.in-grey-600 Completed at
+          %th
+            %span.in-grey-600 Status
+          %th
+            %span.in-grey-600 Total
+      %tbody
+        - @orders.each do |order|
+          %tr{"data-link": "/order/#{order.id}"}
+            %td
+              %span.general-order-number ##{get_order_number(order)}
+            %td
+              %span.in-grey-900.font-16.fw-300 #{format_all_order_date(order.updated_at)}
+            %td
+              %span.font-16.in-grey-900.fw-300 #{order.order_status[:display_title]}
+            %td
+              %strong.font-16 €#{round_price(order.total)}

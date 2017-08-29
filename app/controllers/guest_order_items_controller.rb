@@ -34,6 +34,8 @@ class GuestOrderItemsController < ApplicationController
     @order_item.quantity = @order_item.quantity == 1 ? 1 : @order_item.quantity - 1
     @order_item.update({quantity: @order_item.quantity})
     @order_items = @order.guest_order_items
+    @order.subtotal = @order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    @order.update(subtotal: @order[:subtotal])
 
     respond_to do |format|
       format.js {render '../views/guest_order_items/update.js.erb'}
@@ -47,6 +49,8 @@ class GuestOrderItemsController < ApplicationController
     @order_item.quantity += 1
     @order_item.update({quantity: @order_item.quantity})
     @order_items = @order.guest_order_items
+    @order.subtotal = @order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    @order.update(subtotal: @order[:subtotal])
 
     respond_to do |format|
       format.js {render '../views/guest_order_items/update.js.erb'}

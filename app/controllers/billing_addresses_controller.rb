@@ -1,6 +1,11 @@
 class BillingAddressesController < ApplicationController
   def create
-    BillingAddress.create(billing_address_params)
+    @billing_address = BillingAddress.create(billing_address_params)
+    @selected_bill = @billing_address[:country]
+    @phone_code_bill = @billing_address[:phone]
+    respond_to do |format|
+      format.js {render '../views/users/update_billing_address.js.erb'}
+    end
   end
 
   def update

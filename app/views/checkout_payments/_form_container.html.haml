@@ -1,0 +1,51 @@
+= form_for @payment_card, url: order_payment_url, method: method_define(@payment_card), remote: true do |f|
+  .payment-number
+    .form-group{ class: ("has-error" if !@payment_card.errors[:card_number].empty?) }
+      = f.label :card_number, "Card Number", class: 'control-label input-label'
+      = f.text_field :card_number, class: 'form-control', placeholder: "Card Number", value: @payment_card[:card_number]
+      -if !@payment_card.errors[:card_number].empty?
+        %span.help-block= "Card Number #{@payment_card.errors[:card_number][0]}" 
+  .payment-row
+    .form-group{ class: ("has-error" if !@payment_card.errors[:name].empty?) }
+      = f.label :name, "Name on Card", class: 'control-label input-label'
+      = f.text_field :name, class: 'form-control', placeholder: "Name on Card", value: @payment_card[:name]
+      -if !@payment_card.errors[:name].empty?
+        %span.help-block= "Name on Card #{@payment_card.errors[:name][0]}"
+    .form-group{ class: ("has-error" if !@payment_card.errors[:expiry_date].empty?) }
+      = f.label :expiry_date, "MM / YY", class: 'control-label input-label'
+      = f.text_field :expiry_date, class: 'form-control', placeholder: "MM / YY", value: @payment_card[:expiry_date]
+      -if !@payment_card.errors[:expiry_date].empty?
+        %span.help-block= "MM / YY #{@payment_card.errors[:expiry_date][0]}"
+    .form-group{ class: ("has-error" if !@payment_card.errors[:cvv].empty?) }
+      = f.label :cvv, "CVV", class: 'control-label input-label'
+      = f.password_field :cvv, class: 'form-control', placeholder: "CVV", value: @payment_card[:cvv]
+      -if !@payment_card.errors[:cvv].empty?
+        %span.help-block= "CVV #{@payment_card.errors[:cvv][0]}"
+      %i.fa.fa-question-circle.general-form-help
+      .tooltip-card 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front
+  = f.hidden_field :order_id, value: @order.id 
+  .general-text-align
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table
+      %tr
+        %td
+          %p.font-16 Subtotal:
+        %td
+          %p.font-16 €#{round_price(@order.subtotal)}
+      %tr
+        %td
+          %p.font-16 Discount:
+        %td
+          %p.font-16 #{count_discount(@order.subtotal, @order.discount)}
+      %tr
+        %td
+          %p.font-16 Shipping:
+        %td
+          %p.font-16 €#{round_price(@order.delivery)}
+      %tr
+        %td
+          %strong.font-18 Order Total:
+        %td
+          %strong.font-18 €#{round_price(@order.total)}
+  .text-center
+    = button_tag "Save and Continue", class: "btn mb-80 center-block checkout-btn"

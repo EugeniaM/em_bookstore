@@ -1,6 +1,12 @@
 class ShippingAddressesController < ApplicationController
   def create
-    ShippingAddress.create(shipping_address_params)
+    @shipping_address = ShippingAddress.create(shipping_address_params)
+    @selected_ship = @shipping_address[:country]
+    @phone_code_ship = @shipping_address[:phone]
+
+    respond_to do |format|
+      format.js {render '../views/users/update_shipping_address.js.erb'}
+    end
   end
 
   def update
