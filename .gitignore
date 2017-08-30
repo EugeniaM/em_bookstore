@@ -13,7 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 
-database.yml
 application.yml
 doc/
 *.swp
