@@ -17,5 +17,5 @@
 Category.delete_all
 Category.create! id: 1, name: "Mobile Development"
 Category.create! id: 2, name: "Photo"
-Category.create! id: 1, name: "Web Design"
-Category.create! id: 1, name: "Web Development"
+Category.create! id: 3, name: "Web Design"
+Category.create! id: 4, name: "Web Development"
