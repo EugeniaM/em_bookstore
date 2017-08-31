@@ -14,8 +14,8 @@
 # OrderStatus.create! id: 4, name: "delivered", display_title: "Delivered"
 # OrderStatus.create! id: 5, name: "canceled", display_title: "Canceled"
 
-Categories.delete_all
-Categories.create! id: 1, name: "Mobile Development"
-Categories.create! id: 2, name: "Photo"
-Categories.create! id: 1, name: "Web Design"
-Categories.create! id: 1, name: "Web Development"
+Category.delete_all
+Category.create! id: 1, name: "Mobile Development"
+Category.create! id: 2, name: "Photo"
+Category.create! id: 1, name: "Web Design"
+Category.create! id: 1, name: "Web Development"
