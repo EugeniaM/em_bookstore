@@ -6,7 +6,7 @@
         .general-thumb-link-wrap
           %a.thumb-hover-link#eye{href: book_path(book.id)}
             %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-          = form_for order_item, remote: true do |f|
+          = form_for @order_item, remote: true do |f|
             = f.hidden_field :book_id, value: book.id
             = f.hidden_field :quantity, value: "1"
             = button_tag( :class => "thumb-hover-link submit") do
