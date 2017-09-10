@@ -47,6 +47,10 @@ class OrdersController < ApplicationController
     order_items = @order.order_items
     order_items.each do |oi|
       existing_review = Review.find_by user_id: @order.user_id, book_id: oi.book_id
+      book = Book.find(oi.book_id)
+      order_counter = book[:order_counter] || 0
+      order_counter += 1
+      book.update(order_counter: order_counter)
       if existing_review
         existing_review.update(verified: true)
       end
