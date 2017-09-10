@@ -23,7 +23,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     save_orders(user)
     UserMailer.welcome_email(user, generated_password).deliver_now
     sign_in(:user, user)
-    redirect_to root_path
+    if session[:referrer] == '/guest_identify'
+      redirect_to checkout_addresses_path
+    else
+      redirect_to root_path
+    end
   end
 
   private
@@ -37,7 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # user = User.find_by email: params[:user][:email]
     return if !user
 
-    user_order = Order.find_by user_id: user.id
+    user_order = Order.find_by user_id: user.id, order_status_id: 1
 
     if !user_order
       new_order = Order.new

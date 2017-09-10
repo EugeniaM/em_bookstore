@@ -1,7 +1,9 @@
 class PaymentCardsController < ApplicationController
   def create
     @payment_card = PaymentCard.create(payment_card_params)
-
+    puts "!!!!!!!!!!!!!"
+    puts params[:order_id]
+    puts "!!!!!!!!!!!!!"
     if @payment_card.id
       render js: "window.location = '#{checkout_confirms_path}'"
     else

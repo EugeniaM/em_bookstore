@@ -40,13 +40,9 @@ RSpec.describe "Home" do
     click_link(I18n.t('home.get_started'))
     expect(page).to have_selector('h1', text: I18n.t('catalog.catalog'))
 
-    visit root_path
-    first('#eye', visible: false).click
-    expect(page).to have_selector('i.fa.fa-long-arrow-left')
-
-    visit root_path
-    first('#eye', visible: false).click
-    expect(page).to have_selector('i.fa.fa-long-arrow-left')
+    # visit root_path
+    # first('#eye', visible: false).click
+    # expect(page).to have_selector('i.fa.fa-long-arrow-left')
   end
 
   describe "when cart is empty" do
@@ -54,12 +50,12 @@ RSpec.describe "Home" do
     it { should_not have_selector('span.shop-icon.full-cart') }
   end
 
-  describe "when click on cart icon inside best_sellers list", js: true do
-    it "should add items in order_items" do
-      first('.thumb-hover-link.submit', visible: false).click
-      expect(page).to have_selector('.full-cart')
-    end
-  end
+  # describe "when click on cart icon inside best_sellers list", js: true do
+  #   it "should add items in order_items" do
+  #     first('.thumb-hover-link.submit', visible: false).click
+  #     expect(page).to have_selector('.full-cart')
+  #   end
+  # end
 
   describe "when click on cart icon inside carousel list", js: true do
     it "should add items in order_items" do

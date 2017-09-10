@@ -19,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
     user = User.find_by email: params[:user][:email]
     return if !user
 
-    user_order = Order.find_by user_id: user.id
+    user_order = Order.find_by user_id: user.id, order_status_id: 1
 
     if !user_order
       new_order = Order.new

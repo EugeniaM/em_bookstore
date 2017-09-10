@@ -5,6 +5,7 @@ class BillingAddressesController < ApplicationController
     @phone_code_bill = @billing_address[:phone]
     respond_to do |format|
       format.js {render '../views/users/update_billing_address.js.erb'}
+      format.html
     end
   end
 
@@ -17,6 +18,7 @@ class BillingAddressesController < ApplicationController
 
     respond_to do |format|
       format.js {render '../views/users/update_billing_address.js.erb'}
+      format.html
     end
   end
 

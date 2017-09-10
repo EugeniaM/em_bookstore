@@ -44,6 +44,13 @@ class OrdersController < ApplicationController
     @order = current_order
     order_number = "R00000000"[0...-(@order.id.to_s.size)] + @order.id.to_s
     updated = @order.update(order_status_id: 2, number: order_number)
+    order_items = @order.order_items
+    order_items.each do |oi|
+      existing_review = Review.find_by user_id: @order.user_id, book_id: oi.book_id
+      if existing_review
+        existing_review.update(verified: true)
+      end
+    end
     if updated
       redirect_to "/checkout_completes/#{@order.id}"
     end

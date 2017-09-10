@@ -4,13 +4,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
-    puts "+++++++++++++++"
-    puts session[:referrer]
-    puts "+++++++++++++++"
-
     if @user.persisted?
       sign_in @user
-      redirect_to root_path
+      if session[:referrer] == '/guest_identify'
+        redirect_to checkout_addresses_path
+      else
+        redirect_to root_path
+      end
     else
       redirect_to root_path
     end
@@ -27,7 +27,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.from_omniauth(request.env['omniauth.auth'])
     return if !user
 
-    user_order = Order.find_by user_id: user.id
+    user_order = Order.find_by user_id: user.id, order_status_id: 1
 
     if !user_order
       new_order = Order.new
@@ -52,7 +52,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         new_oi.save
         GuestOrderItem.destroy(oi.id)
       end
-
       GuestOrder.destroy(guest_order.id)
     else
       guest_order_items.each do |oi|

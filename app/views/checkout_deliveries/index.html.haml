@@ -47,6 +47,7 @@
               %span 2 to 3 days
             .delivery-price.item
               %span €15.00
+    %input{type: "text", hidden: true, value: @order.id, id: "hidden-order-id"}
     .general-text-align.delivery-summary
       = render "checkout_deliveries/summary"
     .text-center.redirect-to

@@ -30,7 +30,7 @@
         .col-sm-4
           .input-group.general-input-group
             %label.input-label= t('cart_page.coupon_label')
-            = f.text_field :discount, class: 'form-control mb-30', placeholder: "Enter Your Coupon Code", value: "", disabled: !current_user
+            = f.text_field :discount, class: 'form-control mb-30', placeholder: "Enter Your Coupon Code", value: "", disabled: !current_user, id: "discount-input"
             %div
               = button_tag( class: "btn btn-primary mb-15 res-block", disabled: !current_user) do
                 %span.btn-title= t('cart_page.update_cart')
@@ -42,17 +42,17 @@
               %td
                 %p.font-16= t('cart_page.subtotal_summary')
               %td
-                %p.font-16 €#{round_price(current_order.subtotal)}
+                %p.font-16.subtotal €#{round_price(current_order.subtotal)}
             %tr
               %td
                 %p.font-16= t('cart_page.coupon')
               %td
-                %p.font-16= count_discount(current_order.subtotal, current_order.discount)
+                %p.font-16.discount= count_discount(current_order.subtotal, current_order.discount)
             %tr
               %td
                 %strong.font-18= t('cart_page.order_total')
               %td
-                %strong.font-18 €#{round_price(current_order.total)}
+                %strong.font-18.total €#{round_price(current_order.total)}
           - if !current_user
             = link_to t('cart_page.checkout'), identify_path, class: "btn btn-default mb-20 visible-xs-inline-block checkout-btn"
           - else

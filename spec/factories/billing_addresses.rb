@@ -5,7 +5,7 @@ FactoryGirl.define do
     address "12 Gorkogo str"
     city "Dnipro"
     zip { Faker::Address.zip }
-    country "Ukraine"
+    country "UA"
     phone "+1333333333"
     association :user, factory: :user
   end

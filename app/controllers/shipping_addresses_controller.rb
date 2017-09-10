@@ -6,6 +6,7 @@ class ShippingAddressesController < ApplicationController
 
     respond_to do |format|
       format.js {render '../views/users/update_shipping_address.js.erb'}
+      format.html
     end
   end
 
@@ -18,6 +19,7 @@ class ShippingAddressesController < ApplicationController
 
     respond_to do |format|
       format.js {render '../views/users/update_shipping_address.js.erb'}
+      format.html
     end
   end
 

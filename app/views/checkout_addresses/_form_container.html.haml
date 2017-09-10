@@ -92,7 +92,7 @@
           %span.help-block= "#{t('settings_page.phone')} #{@order_address.errors[:shipping_phone][0]}" 
 
     .form-group.checkbox
-      %label.checkbox-label
+      %label.checkbox-label.use-billing-address
         %input.checkbox-input#use-billing-address{type: "checkbox", hidden: "true", name: "use_billing"}
         %span.checkbox-icon
           %i.fa.fa-check

@@ -13,7 +13,8 @@
             %div
               .general-message-date.hidden-xs #{format_date(review.created_at)}
               .max-240
-                .general-message-verified= t('book_page.verified_reviewer')
+                - if review.verified
+                  .general-message-verified= t('book_page.verified_reviewer')
                 .general-message-name #{display_name(review.user)}
             .mb-15
               %i.fa.fa-star{class: ("rate-star" if review.score >= 1)}

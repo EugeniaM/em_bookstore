@@ -31,15 +31,16 @@ class OrderAddressesController < ApplicationController
       @user_billing_address = current_user.billing_address
       @user_shipping_address = current_user.shipping_address
       @selected_bill = @order_address[:billing_country] || 
-                       @user_billing_address ? @user_billing_address[:country] : "UA"
+                       (@user_billing_address ? @user_billing_address[:country] : "UA")
       @phone_code_bill = @order_address[:billing_phone] || 
-                         @user_billing_address ? @user_billing_address[:phone] : "+380"
+                         (@user_billing_address ? @user_billing_address[:phone] : "+380")
       @selected_ship = @order_address[:shipping_country] || 
-                       @user_shipping_address ? @user_shipping_address[:country] : "UA"
+                       (@user_shipping_address ? @user_shipping_address[:country] : "UA")
       @phone_code_ship = @order_address[:shipping_phone] || 
-                         @user_shipping_address ? @user_shipping_address[:phone] : "+380"
+                         (@user_shipping_address ? @user_shipping_address[:phone] : "+380")
       respond_to do |format|
         format.js {render '../views/checkout_addresses/update_address.js.erb'}
+        format.html
       end
     end
   end

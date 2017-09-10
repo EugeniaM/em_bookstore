@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Order do
   user = FactoryGirl.create(:user)
-  let(:order) { FactoryGirl.create(:order, user: user) }
+  let(:order) { FactoryGirl.create(:order, user: user, order_status_id: 1) }
 
   subject { order }
 

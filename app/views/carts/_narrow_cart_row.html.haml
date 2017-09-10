@@ -15,7 +15,7 @@
       %td
         .input-group.general-position
           = link_to "-", get_url(order_item, 'decrement'), method: :patch, remote: true, class: "quantity-link"
-          %input.form-control.quantity-input{type: "text", value: order_item.quantity.to_i}
+          %input.form-control.quantity-input{type: "text", value: order_item.quantity.to_i, readonly: true, name: "quantity"}
           = link_to "+", get_url(order_item, 'increment'), method: :patch, remote: true, class: "quantity-link"
     %tr
       %td

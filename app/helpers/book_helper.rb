@@ -20,7 +20,10 @@ module BookHelper
   end
 
   def name_avatar(review)
-    review.user[:first_name] ? review.user[:first_name].slice(0, 1) : review.user[:email].slice(0, 1)
+    review.user[:first_name] ? review.user[:first_name].slice(0, 1) : 
+    review.user.billing_address ? review.user.billing_address[:first_name].slice(0, 1) :
+    review.user.shipping_address ? review.user.shipping_address[:first_name].slice(0, 1) :
+    review.user[:email].slice(0, 1)
   end
 
   def format_date(date)

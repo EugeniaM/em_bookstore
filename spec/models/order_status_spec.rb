@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OrderStatus, type: :model do
-  let(:order_status) { FactoryGirl.create(:order_status) }
+  begin
+    let(:order_status) { OrderStatus.find(1) }
+  rescue
+    let(:order_status) { FactoryGirl.create(:order_status, id: 1) }
+  end
 
   subject { order_status }
 

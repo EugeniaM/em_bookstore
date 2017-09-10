@@ -43,6 +43,6 @@
     -if !@billing_address.errors[:phone].empty?
       %span.help-block= "#{t('settings_page.phone')} #{@billing_address.errors[:phone][0]}" 
       
-  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :user_id, value: current_user.id, id: 'billing-address-user'
   .text-center.general-text-align
-    = f.submit t('settings_page.save'), class: "btn active-settings-btn narrow"
+    = f.submit t('settings_page.save'), class: "btn active-settings-btn narrow billing-save"

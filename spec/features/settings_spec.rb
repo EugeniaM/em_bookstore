@@ -36,19 +36,19 @@ RSpec.describe "Settings page" do
     describe "user fills in all fields with valid data" do
       it "should save billing address when save button is clicked" do
         click_link(I18n.t('settings_page.address'))
-        billing_address = FactoryGirl.create(:billing_address)
         within('div.billing-address-container') do
-          fill_in I18n.t('settings_page.first_name'), with: billing_address.first_name
-          fill_in I18n.t('settings_page.last_name'), with: billing_address.last_name
-          fill_in I18n.t('settings_page.address'), with: billing_address.address
-          fill_in I18n.t('settings_page.city'), with: billing_address.city
-          fill_in I18n.t('settings_page.zip'), with: billing_address.zip
+          @billing_address = BillingAddress.new
+          fill_in I18n.t('settings_page.first_name'), with: "Test"
+          fill_in I18n.t('settings_page.last_name'), with: "Test"
+          fill_in I18n.t('settings_page.address'), with: "Test, 1"
+          fill_in I18n.t('settings_page.city'), with: "Test"
+          fill_in I18n.t('settings_page.zip'), with: "123456"
           select "Ukraine", from: "billing_address_country"
-          fill_in I18n.t('settings_page.phone'), with: billing_address.phone
+          fill_in I18n.t('settings_page.phone'), with: "+1111111111"
+          first('input#billing-address-user', visible: false).set(user.id)
 
           click_button(I18n.t('settings_page.save'))
         end
-
         user_billing_address = BillingAddress.find_by user_id: user.id
         expect(user_billing_address).not_to be_nil
       end
@@ -57,15 +57,15 @@ RSpec.describe "Settings page" do
     describe "user fills in some fields with invalid data" do
       it "should not save billing address when save button is clicked" do
         click_link(I18n.t('settings_page.address'))
-        billing_address = FactoryGirl.create(:billing_address)
         within('div.billing-address-container') do
+          @billing_address = BillingAddress.new
           fill_in I18n.t('settings_page.first_name'), with: "qwert123"
-          fill_in I18n.t('settings_page.last_name'), with: billing_address.last_name
+          fill_in I18n.t('settings_page.last_name'), with: "Test"
           fill_in I18n.t('settings_page.address'), with: "street\\"
-          fill_in I18n.t('settings_page.city'), with: billing_address.city
-          fill_in I18n.t('settings_page.zip'), with: billing_address.zip
+          fill_in I18n.t('settings_page.city'), with: "Test"
+          fill_in I18n.t('settings_page.zip'), with: "123qwe"
           select "Ukraine", from: "billing_address_country"
-          fill_in I18n.t('settings_page.phone'), with: billing_address.phone
+          fill_in I18n.t('settings_page.phone'), with: "111111111"
 
           click_button(I18n.t('settings_page.save'))
         end
@@ -80,15 +80,15 @@ RSpec.describe "Settings page" do
     describe "user fills in all fields with valid data" do
       it "should save shipping address when save button is clicked" do
         click_link(I18n.t('settings_page.address'))
-        shipping_address = FactoryGirl.create(:shipping_address)
         within('div.shipping-address-container') do
-          fill_in I18n.t('settings_page.first_name'), with: shipping_address.first_name
-          fill_in I18n.t('settings_page.last_name'), with: shipping_address.last_name
-          fill_in I18n.t('settings_page.address'), with: shipping_address.address
-          fill_in I18n.t('settings_page.city'), with: shipping_address.city
-          fill_in I18n.t('settings_page.zip'), with: shipping_address.zip
+          @shipping_address = ShippingAddress.new
+          fill_in I18n.t('settings_page.first_name'), with: "Test"
+          fill_in I18n.t('settings_page.last_name'), with: "Test"
+          fill_in I18n.t('settings_page.address'), with: "Test, 1"
+          fill_in I18n.t('settings_page.city'), with: "Test"
+          fill_in I18n.t('settings_page.zip'), with: "123456"
           select "Ukraine", from: "shipping_address_country"
-          fill_in I18n.t('settings_page.phone'), with: shipping_address.phone
+          fill_in I18n.t('settings_page.phone'), with: "+1111111111"
 
           click_button(I18n.t('settings_page.save'))
         end
@@ -101,15 +101,15 @@ RSpec.describe "Settings page" do
     describe "user fills in some fields with invalid data" do
       it "should not save shipping address when save button is clicked" do
         click_link(I18n.t('settings_page.address'))
-        shipping_address = FactoryGirl.create(:shipping_address)
         within('div.shipping-address-container') do
+          @shipping_address = ShippingAddress.new
           fill_in I18n.t('settings_page.first_name'), with: "qwert123"
-          fill_in I18n.t('settings_page.last_name'), with: shipping_address.last_name
+          fill_in I18n.t('settings_page.last_name'), with: "Test"
           fill_in I18n.t('settings_page.address'), with: "street\\"
-          fill_in I18n.t('settings_page.city'), with: shipping_address.city
-          fill_in I18n.t('settings_page.zip'), with: shipping_address.zip
+          fill_in I18n.t('settings_page.city'), with: "Test"
+          fill_in I18n.t('settings_page.zip'), with: "123qwe"
           select "Ukraine", from: "shipping_address_country"
-          fill_in I18n.t('settings_page.phone'), with: shipping_address.phone
+          fill_in I18n.t('settings_page.phone'), with: "111111111"
 
           click_button(I18n.t('settings_page.save'))
         end

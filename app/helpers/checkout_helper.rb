@@ -56,7 +56,7 @@ module CheckoutHelper
   end
 
   def shipping_full_name(address)
-    "#{address.shipping_first_name} #{address.shipping_last_name}"
+    "#{address.shipping_first_name} #{address.shipping_last_name}" if address
   end
 
   def delivery_title(id)

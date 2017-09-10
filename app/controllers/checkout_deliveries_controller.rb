@@ -16,6 +16,7 @@ class CheckoutDeliveriesController < ApplicationController
 
     respond_to do |format|
       format.js {render '../views/checkout_deliveries/update.js.erb'}
+      format.html
     end
   end
 end
