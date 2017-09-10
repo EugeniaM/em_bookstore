@@ -1,0 +1,21 @@
+.general-cart-item.divider-lg-bottom
+  .general-img-wrap-table
+    %img.cart-img-shadow{'src': book.covers[0].url(:thumb), alt: book.title}
+  %p.title #{book.title}
+  %p #{book.short_description}
+  %table.table
+    %tr
+      %td
+        %span.in-grey-600 Price
+      %td
+        %span.font-16.in-gold-500 €#{order_item.unit_price}
+    %tr
+      %td.vertical-middle
+        %span.in-grey-600 Quantity
+      %td
+        %span.ml-30 #{order_item.quantity.to_i}
+    %tr
+      %td
+        %span.in-grey-600 SubTotal
+      %td
+        %span.font-16.in-gold-500 €#{order_item.total_price}

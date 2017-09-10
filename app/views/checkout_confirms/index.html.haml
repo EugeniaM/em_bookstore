@@ -1,0 +1,46 @@
+%main.container
+  = render "layouts/checkout_header"
+  .summary-info
+    = render "checkout_confirms/summary_info"
+  .visible-xs
+    - @order_items.each do |order_item|
+      = render 'checkout_confirms/narrow_cart_row', book: order_item.book, order_item: order_item
+  .hidden-xs
+    %table.table.table-hover.cart-container
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600 Book
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600 Price
+        %th.col-quantity
+          %span.in-grey-600 Quantity
+        %th.col-total
+          %span.in-grey-600 Total
+      - @order_items.each do |order_item|
+        = render 'checkout_confirms/wide_cart_row', book: order_item.book, order_item: order_item
+  .text-center.general-text-right
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      %tr
+        %td
+          %p.font-16 Subtotal:
+        %td
+          %p.font-16 €#{round_price(@order.subtotal)}
+      %tr
+        %td
+          %p.font-16 Discount:
+        %td
+          %p.font-16 #{count_discount(@order.subtotal, @order.discount)}
+      %tr
+        %td
+          %p.font-16 Shipping:
+        %td
+          %p.font-16 €#{round_price(@order.delivery)}
+      %tr
+        %td
+          %strong.font-18 Order Total:
+        %td
+          %strong.font-18 €#{round_price(@order.total)}
+  .text-center.redirect-to
+    =link_to "Place Order", "/orders/place_order", class: "checkout-btn link"

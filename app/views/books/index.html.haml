@@ -1,0 +1,8 @@
+%main.container
+  %h1.general-title-margin= t('catalog.catalog')
+  = render 'filter_sort.html.haml'
+  .mb-120
+    .row.best-seller-item#paginated-list
+      = render @books, order_item: @order_item
+    .text-center
+      %button.btn.btn-primary#view-more= t('catalog.view_more')

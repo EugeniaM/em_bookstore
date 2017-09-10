@@ -1,0 +1,22 @@
+%p.in-gold-500.font-18 Order Summary
+%table.general-summary-table
+  %tr
+    %td
+      %p.font-16 Subtotal:
+    %td
+      %p.font-16 €#{round_price(@order.subtotal)}
+  %tr
+    %td
+      %p.font-16 Discount:
+    %td
+      %p.font-16 #{count_discount(@order.subtotal, @order.discount)}
+  %tr
+    %td
+      %p.font-16 Shipping:
+    %td
+      %p.font-16.delivery €#{round_price(@order.delivery)}
+  %tr
+    %td
+      %strong.font-18 Order Total:
+    %td
+      %strong.font-18.total_delivery €#{round_price(@order.total)}

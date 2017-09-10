@@ -1,0 +1,4 @@
+%a.shop-link.pull-right{href: cart_path}
+  %span.shop-icon{class: ("full-cart" if order_items_size(current_order) > 0)}
+    -if order_items_size(current_order) > 0
+      %span.shop-quantity= order_items_size(current_order)

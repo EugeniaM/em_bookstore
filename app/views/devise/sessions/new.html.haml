@@ -1,0 +1,33 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title= t('auth.log_in')
+    %a.general-login-icon.black{href: user_facebook_omniauth_authorize_path}
+      %i.fa.fa-facebook-official
+    %p.general-login-text or
+
+  / = render partial: '/helpers/validation_errors', locals: { suspect: resource }
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'auth-form col-md-4 col-md-offset-4'}) do |f|
+    .form-group
+      = f.label t('auth.email_label')
+      = f.email_field :email, autofocus: true, class: 'form-control auth', placeholder: t('auth.email_label')
+    .form-group
+      = f.label t('auth.psw_label')
+      = f.password_field :password, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_label')
+    - if resource.errors.full_messages.length != 0
+      %div.alert.alert-danger You have entered invalid email or password
+    - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+      = link_to t('auth.forgot_psw'), new_password_path(resource_name), class: "orange"
+    .text-center
+      - if devise_mapping.rememberable?
+        .form-group
+          = f.check_box :remember_me
+          = f.label :remember_me
+    .text-center
+      = f.button t('auth.log_in'), class: 'btn btn-primary btn-lg custom-btn'
+    .text-center
+      .options-proposition
+        %span= t('auth.not_have_account')
+        = link_to t('auth.sign_up'), new_user_registration_path, class: "orange"
+
+
+

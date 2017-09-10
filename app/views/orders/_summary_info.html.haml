@@ -1,0 +1,40 @@
+.row.mb-20
+  -if @order_address
+    .col-sm-3
+      %h3.general-subtitle Shipping Address
+      %p.general-address
+        #{shipping_full_name(@order_address)}
+        %br
+        #{@order_address.shipping_address}
+        %br
+        #{@order_address.shipping_city} #{@order_address.shipping_zip}
+        %br
+        #{@shipping_country}
+        %br
+        Phone #{@order_address.shipping_phone}
+    .col-sm-3
+      %h3.general-subtitle Billing Address
+      %p.general-address
+        #{billing_full_name(@order_address)}
+        %br
+        #{@order_address.billing_address}
+        %br
+        #{@order_address.billing_city} #{@order_address.billing_zip}
+        %br
+        #{@billing_country}
+        %br
+        Phone #{@order_address.billing_phone}
+  -if @order.delivery != 0
+    .col-sm-3
+      %h3.general-subtitle Shipments
+      %p.general-address
+        #{delivery_title(@order.delivery)}
+        %br
+        €#{round_price(@order.delivery)}
+  -if @payment_card
+    .col-sm-3
+      %h3.general-subtitle Payment Information
+      %p.general-address
+        #{get_last_digits}
+        %br
+        #{@payment_card.expiry_date}

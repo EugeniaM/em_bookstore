@@ -1,0 +1,41 @@
+.hidden-xs.clearfix
+  .dropdowns.pull-right
+    .dropdown.width-240
+      %a.dropdown-toggle.lead.small.no-decoration{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false", id: "sort-dropdown-trigger"}
+        #{selected_sort}
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu.custom-dropdown
+        - sort_config.each do |item|
+          %li
+            %a{href: define_sort_href(item[:sort_field]), class: "no-decoration"} #{item[:sort_title]}
+  %ul.list-inline.pt-10.mb-25.mr-240
+    %li.mr-35
+      %a.filter-link{href: define_filter_href(nil), class: ("selected" if selected_category?("all"))}
+        = t('catalog.all')
+        %span.badge.general-badge= books_count
+    - categories.each do |category|
+      %li.mr-35
+        %a.filter-link{href: define_filter_href(category.id), class: ("selected" if selected_category?(category.id))}
+          = category.name
+          %span.badge.general-badge= category.books.count
+.dropdowns.mb-25.visible-xs
+  %p.lead.small.mb-10= t('catalog.filter_by_category')
+  .dropdown
+    %a.dropdown-toggle.lead.small.no-decoration{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      #{selected_category}
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu.custom-dropdown
+      %li
+        %a{href: define_filter_href(nil), class: "no-decoration"} All (#{books_count})
+      - categories.each do |category|
+        %li
+          %a{href: define_filter_href(category.id), class: "no-decoration"}= "#{category.name} (#{category.books.count})"
+  %p.lead.small.mb-10 Sort by
+  .dropdown
+    %a.dropdown-toggle.lead.small.no-decoration{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      #{selected_sort}
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu.custom-dropdown
+      - sort_config.each do |item|
+        %li
+          %a{href: define_sort_href(item[:sort_field]), class: "no-decoration"} #{item[:sort_title]}

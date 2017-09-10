@@ -1,0 +1,40 @@
+.row.mb-60
+  .col-sm-5
+    - if @user && @user.errors.full_messages.size
+      - @user.errors.full_messages.each do |message|
+        %p.error-block *#{message}
+    %p.in-gold-500.font-18.mb-25= t('settings_page.email')
+    .email-form
+      = form_for current_user, url: "/users/update", method: :patch, remote: true do |f|
+        .form-group
+          = f.label :email, t('settings_page.enter_email'), class: 'control-label input-label'
+          = f.email_field :email, class: 'form-control', id: "email", placeholder: t('settings_page.email_placeholder'), value: current_user.email
+        .general-text-align
+          = f.submit t('settings_page.save'), class: 'btn btn-default mb-35 active-settings-btn narrow'
+  .col-sm-5.col-sm-offset-1
+    - if current_user.provider != 'facebook'
+      %p.in-gold-500.font-18.mb-25= t('settings_page.password')
+      .password-form
+        = form_for current_user, url: "/users/update_password", method: :patch, remote: true do |f|
+          .form-group
+            = f.label :current_password, t('settings_page.old_psw'), class: 'control-label input-label'
+            = f.password_field :current_password, class: 'form-control', placeholder: t('settings_page.old_psw')
+          .form-group
+            = f.label :password, t('settings_page.new_psw'), class: 'control-label input-label'
+            = f.password_field :password, class: 'form-control', placeholder: t('settings_page.new_psw')
+          .form-group
+            = f.label :password_confirmation, t('settings_page.confirm_psw'), class: 'control-label input-label'
+            = f.password_field :password_confirmation, class: 'form-control', placeholder: t('settings_page.confirm_psw')
+          .general-text-align
+            = f.submit t('settings_page.save'), class: 'btn btn-default mb-35 active-settings-btn narrow'
+  .col-sm-12
+    %p.in-gold-500.font-18.mb-25= t('settings_page.remove_account')
+    = form_for current_user, url: "/users/destroy", method: :delete do |f|
+      .general-settings-btn
+        = button_tag t('settings_page.remove_acc_label'), disabled: true, class: "btn mb-20 active-settings-btn", id: "delete-btn"
+      .form-group.checkbox.general-settings-checkbox
+        %label.checkbox-label
+          %input.checkbox-input#delete-checkbox{type: "checkbox", hidden: "true"}
+          %span.checkbox-icon
+            %i.fa.fa-check
+          %span.checkbox-text= t('settings_page.agreement')

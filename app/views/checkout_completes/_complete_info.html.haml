@@ -1,0 +1,21 @@
+.text-center.mb-40
+  %h3.general-subtitle Thank You for your Order!
+  %p.fw-300 An order confirmation has been sent to #{@user.email}
+.row.mb-20
+  .col-sm-6
+    .visible-xs
+      %p.general-order-number.mb-0 Order ##{@order.number}
+      %p.general-address.mb-30 #{format_order_date(@order.updated_at)}
+    %p.general-address
+      #{billing_full_name(@order_address)}
+      %br
+      #{@order_address.billing_address}
+      %br
+      #{@order_address.billing_city} #{@order_address.billing_zip}
+      %br
+      #{@billing_country}
+      %br
+      Phone #{@order_address.billing_phone}
+  .col-sm-6.hidden-xs.text-right
+    %p.general-order-number.mb-0 Order ##{@order.number}
+    %p.general-address.mb-30 #{format_order_date(@order.updated_at)}

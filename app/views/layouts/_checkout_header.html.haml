@@ -1,0 +1,33 @@
+%h1.general-title-margin Checkout
+%ul.steps.list-inline
+  %li.step{ class: ("active" if current_url == '/checkout_addresses' || address_checked) }
+    -if address_checked && current_url != '/checkout_addresses'
+      %span.step-number.glyphicon.glyphicon-ok
+    -else
+      %span.step-number 1
+    %span.step-text.hidden-xs Address
+  %li.step-divider
+  %li.step{ class: ("active" if current_url == '/checkout_deliveries' || @order.delivery != 0) }
+    -if @order.delivery != 0 && current_url != '/checkout_deliveries'
+      %span.step-number.glyphicon.glyphicon-ok
+    -else
+      %span.step-number 2
+    %span.step-text.hidden-xs Delivery
+  %li.step-divider
+  %li.step{ class: ("active" if current_url == '/checkout_payments' || payment_checked) }
+    -if payment_checked && current_url != '/checkout_payments'
+      %span.step-number.glyphicon.glyphicon-ok
+    -else
+      %span.step-number 3
+    %span.step-text.hidden-xs Payment
+  %li.step-divider
+  %li.step{ class: ("active" if current_url == '/checkout_confirms' || @order.order_status_id == 2) }
+    -if @order.order_status_id == 2 && current_url != '/checkout_confirms'
+      %span.step-number.glyphicon.glyphicon-ok
+    -else
+      %span.step-number 4
+    %span.step-text.hidden-xs Confirm
+  %li.step-divider
+  %li.step{ class: ("active" if current_url == '/checkout_completes') }
+    %span.step-number 5
+    %span.step-text.hidden-xs Complete

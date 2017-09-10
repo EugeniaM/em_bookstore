@@ -1,0 +1,4 @@
+$('#paginated-list').append('<%= escape_javascript render(@books) %>');
+<% if @books.last_page? %>
+  $('#view-more').remove();
+<% end %>

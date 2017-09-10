@@ -1,0 +1,67 @@
+%main.container
+  %a.general-back-link{href: "javascript:history.back()"}
+    %i.fa.fa-long-arrow-left.mr-15
+    = t('book_page.back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20.main-cover
+          %img.img-responsive{'src': @main_cover.url(:large), alt: @book.title}
+        .images.clearfix
+          - @book_imgs.each do |image|
+            %img{'src': image.url(:thumb), alt: @book.title, class: "book-image"}
+    .col-sm-6
+      %h1.mt-res-0 #{@book.title}
+      %p.lead.small #{authors(@book.authors)}
+      = form_for @order_item, remote: true do |f|      
+        .row
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10 €#{@book.price}
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              .input-link.decrement
+                %i.fa.fa-minus.line-height-40
+              = f.text_field :quantity, class: 'form-control quantity-input', id: 'quantity-input', value: @qty
+              .input-link.increment
+                %i.fa.fa-plus.line-height-40
+          .col-xs-7.col-md-5
+            = f.hidden_field :book_id, value: @book.id
+            = button_tag( :class => "btn btn-default pull-right general-position add-link") do
+              %span.btn-title= t('book_page.add')
+      .general-info-wrap.divider-lg
+        %p= t('book_page.description')
+        %div
+          -if @book.full_description.length > 370
+            %p.lead.small.line-height-2
+              = truncate(@book.full_description, length: 370)
+              %span.read-more= t('book_page.read_more')
+            %script{type: 'text/javascript'}
+              :plain
+                $('.read-more').on('click', function(e) {
+                  e.preventDefault()
+                  $('p.lead.small.line-height-2').html("#{@book.full_description}")
+                })
+          - else
+            %p.lead.small.line-height-2 #{@book.full_description}
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('book_page.year_of_publication')
+          %p.lead.small.pull-right #{@book.publication_year}
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('book_page.dimensions')
+          %p.lead.small.pull-right #{@book.dimensions}
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('book.page.materials')
+          %p.lead.small.pull-right #{@book.materials}
+  .reviews-tabs
+    .tab-container#new-review{class: ("selected-tab" if !@reviews_list)}
+      %span.link-tab#new-review-tab{class: ("selected-tab" if !@reviews_list), data: @book.id}= t('book_page.Write a Review')
+    .tab-container#reviews-list{class: ("selected-tab" if @reviews_list)}
+      %span.link-tab#reviews-list-tab{class: ("selected-tab" if @reviews_list), data: @book.id} #{show_reviews_counter}
+  #review-handler
+    -if !@reviews_list
+      = render file: 'reviews/create', book: @book
+    - else
+      = render file: 'reviews/index', book: @book

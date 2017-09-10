@@ -1,0 +1,29 @@
+class BillingAddressesController < ApplicationController
+  def create
+    @billing_address = BillingAddress.create(billing_address_params)
+    @selected_bill = @billing_address[:country]
+    @phone_code_bill = @billing_address[:phone]
+    respond_to do |format|
+      format.js {render '../views/users/update_billing_address.js.erb'}
+      format.html
+    end
+  end
+
+  def update
+    @billing_address = BillingAddress.find(params[:id])
+    @billing_address.update_attributes(billing_address_params)
+
+    @selected_bill = @billing_address[:country]
+    @phone_code_bill = @billing_address[:phone]
+
+    respond_to do |format|
+      format.js {render '../views/users/update_billing_address.js.erb'}
+      format.html
+    end
+  end
+
+
+  def billing_address_params
+    params.require(:billing_address).permit(:first_name, :last_name, :address, :city, :zip, :country, :phone, :user_id)
+  end
+end

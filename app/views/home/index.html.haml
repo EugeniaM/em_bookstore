@@ -1,0 +1,35 @@
+/ - provide(:title, "Home")
+
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    - @last_added_books.each_with_index do |book, index|
+      %li{class: (index == 0 ? 'active' : ''), 'data-target': "#slider", 'data-slide-to': index.to_s}
+  .carousel-inner{role: "listbox"}
+    - @last_added_books.each_with_index do |book, index|
+      .item{class: (index == 0 ? 'active' : ''), href: "#slider", 'data-slide': "next"}
+        .row
+          .col-sm-5.img-container
+            .general-img-wrap
+              %img.img-shadow.general-thumbnail-img{'src': book.covers[0].url(:medium), alt: book.title}
+          .col-sm-7
+            .mb-60
+              %h2.slide-titile #{book.title}
+              %p.lead.description #{limit_description(book.short_description)}
+              %p.lead.small #{authors(book.authors)}
+              .general-align.stop-propagation
+                = form_for @order_item, remote: true do |f|
+                  = f.hidden_field :book_id, value: book.id
+                  = f.hidden_field :quantity, value: "1"
+                  = button_tag( :class => "btn btn-primary carousel-buy-link") do
+                    %span.btn-title= t('home.buy_now')
+.container
+  .jumbotron.text-center.mb-0
+    %h2.h1= t('home.welcome_msg')
+    .mb-res-50.message
+      %p= t('home.info_msg')
+    = link_to t('home.get_started'), books_path(custom_sort: "title ASC"), class: "btn btn-default button-link", id: "get-started"
+.mb-35.best-sellers-container
+  %h3 Best Sellers
+  .row.best-seller-item
+    - @best_sellers.each do |book|
+      = render 'books/book', book: book, order_item: @order_item

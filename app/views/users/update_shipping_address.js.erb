@@ -1,0 +1,8 @@
+$(".shipping-address-container").html("<%= escape_javascript(render 'users/shipping_address') %>")
+$('#shipping_address_country').change(function(e) {
+  var url;
+  if(this.value) {
+    url = "shipping_country_change?country=" + this.value;
+    $.get(url);
+  }
+})

@@ -1,0 +1,48 @@
+%h3.general-subtitle.mt-0= t('settings_page.shipping_address')
+= form_for @shipping_address, url: shipping_address_url, method: address_method(@shipping_address), remote: true do |f|
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:first_name].empty?) }
+    = f.label :first_name, t('settings_page.first_name'), class: 'control-label input-label'
+    = f.text_field :first_name, class: 'form-control', placeholder: t('settings_page.first_name'), value: @shipping_address.first_name
+    -if !@shipping_address.errors[:first_name].empty?
+      %span.help-block= "#{t('settings_page.first_name')} #{@shipping_address.errors[:first_name][0]}" 
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:last_name].empty?) }
+    = f.label :last_name, t('settings_page.last_name'), class: 'control-label input-label'
+    = f.text_field :last_name, class: 'form-control', placeholder: t('settings_page.last_name'), value: @shipping_address.last_name
+    -if !@shipping_address.errors[:last_name].empty?
+      %span.help-block= "#{t('settings_page.last_name')} #{@shipping_address.errors[:last_name][0]}" 
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:address].empty?) }
+    = f.label :address, t('settings_page.address'), class: 'control-label input-label'
+    = f.text_field :address, class: 'form-control', placeholder: t('settings_page.address'), value: @shipping_address.address
+    -if !@shipping_address.errors[:address].empty?
+      %span.help-block= "#{t('settings_page.address')} #{@shipping_address.errors[:address][0]}" 
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:city].empty?) }
+    = f.label :city, t('settings_page.city'), class: 'control-label input-label'
+    = f.text_field :city, class: 'form-control', placeholder: t('settings_page.city'), value: @shipping_address.city
+    -if !@shipping_address.errors[:city].empty?
+      %span.help-block= "#{t('settings_page.city')} #{@shipping_address.errors[:city][0]}" 
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:zip].empty?) }
+    = f.label :zip, t('settings_page.zip'), class: 'control-label input-label'
+    = f.text_field :zip, class: 'form-control', placeholder: t('settings_page.zip'), value: @shipping_address.zip
+    -if !@shipping_address.errors[:zip].empty?
+      %span.help-block= "#{t('settings_page.zip')} #{@shipping_address.errors[:zip][0]}" 
+
+  .form-group.select{ class: ("has-error" if !@shipping_address.errors[:country].empty?) }
+    = f.label :country, t('settings_page.country'), class: 'control-label input-label'
+    = f.country_select(:country, {selected: @selected_ship}, {class: "form-control", placeholder: t('settings_page.country_placeholder')})
+    -if !@shipping_address.errors[:country].empty?
+      %span.help-block= "#{t('settings_page.country')} #{@shipping_address.errors[:country][0]}" 
+
+  .form-group{ class: ("has-error" if !@shipping_address.errors[:phone].empty?) }
+    = f.label :phone, t('settings_page.phone'), class: 'control-label input-label'
+    = f.text_field :phone, class: 'form-control', placeholder: t('settings_page.phone_placeholder'), value: @phone_code_ship
+    -if !@shipping_address.errors[:phone].empty?
+      %span.help-block= "#{t('settings_page.phone')} #{@shipping_address.errors[:phone][0]}" 
+
+  = f.hidden_field :user_id, value: current_user.id
+  .text-center.general-text-align
+    = f.submit t('settings_page.save'), class: "btn active-settings-btn narrow"
