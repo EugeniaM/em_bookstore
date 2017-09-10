@@ -9,21 +9,21 @@ machine:
     version:
       2.4.0
 
-#   # Override /etc/hosts
-#   hosts:
-#     circlehost: 127.0.0.1
-#     dev.mycompany.com: 127.0.0.1
+  # Override /etc/hosts
+  hosts:
+    circlehost: 127.0.0.1
+    dev.mycompany.com: 127.0.0.1
 
-#   # Add some environment variables
-#   environment:
-#     CIRCLE_ENV: test
-#     DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
+  # Add some environment variables
+  environment:
+    CIRCLE_ENV: test
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
 
-# ## Customize checkout
-# checkout:
-#   post:
-#     - git submodule sync
-#     - git submodule update --init # use submodules
+## Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
 
 ## Customize dependencies
 dependencies:
@@ -44,22 +44,22 @@ dependencies:
     - "custom_1"   # relative to the build directory
     - "~/custom_2" # relative to the user's home directory
 
-## Customize database setup
-# database:
-#   override:
-#     # replace CircleCI's generated database.yml
-#     - cp config/database.yml.ci config/database.yml
-#     - bundle exec rake db:create db:schema:load
+# Customize database setup
+database:
+  override:
+    # replace CircleCI's generated database.yml
+    - cp config/database.yml.ci config/database.yml
+    - bundle exec rake db:create db:schema:load
 
-# ## Customize test commands
-# test:
-#   override:
-#     - phpunit test/unit-tests # use PHPunit for testing
-#   post:
-#     - bundle exec rake jasmine:ci: # add an extra test type
-#         environment:
-#           RAILS_ENV: test
-#           RACK_ENV: test
+## Customize test commands
+test:
+  override:
+    - phpunit test/unit-tests # use PHPunit for testing
+  post:
+    - bundle exec rake jasmine:ci: # add an extra test type
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
 
 ## Customize deployment commands
 deployment:
