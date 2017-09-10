@@ -11,7 +11,15 @@ module OrdersHelper
     if params[:status]
       OrderStatus.find(params[:status]).display_title
     else
-      ""
+      "All"
+    end
+  end
+
+  def get_redirect_link(order)
+    if order.order_status_id == 1
+      cart_path
+    else
+      "/order/#{order.id}"
     end
   end
 end

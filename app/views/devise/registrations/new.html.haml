@@ -23,6 +23,8 @@
     .form-group
       = f.label t('auth.psw_confirm_label')
       = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_confirm_label')
+    - if resource.errors.full_messages.length != 0
+      %div.alert.alert-danger You have entered invalid email or password
     .text-center
       = f.button t('auth.sign_up'), class: 'btn btn-primary btn-lg custom-btn'
     .text-center

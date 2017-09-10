@@ -13,6 +13,8 @@
     .form-group
       = f.label t('auth.psw_label')
       = f.password_field :password, autocomplete: 'off', class: 'form-control auth', placeholder: t('auth.psw_label')
+    - if resource.errors.full_messages.length != 0
+      %div.alert.alert-danger You have entered invalid email or password
     - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
       = link_to t('auth.forgot_psw'), new_password_path(resource_name), class: "orange"
     .text-center

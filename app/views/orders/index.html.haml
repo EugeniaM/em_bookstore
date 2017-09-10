@@ -25,7 +25,7 @@
             %span.in-grey-600 Total
       %tbody
         - @orders.each do |order|
-          %tr{"data-link": "/order/#{order.id}"}
+          %tr.order-details{"data-link": get_redirect_link(order)}
             %td
               %span.general-order-number ##{get_order_number(order)}
             %td
